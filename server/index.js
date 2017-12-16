@@ -17,7 +17,7 @@ app.get('/api', function (req, res) {
 
 // Auth
 app.post('/auth', function (req, res){
-    token = req.header("Authorization");
+    token = req.header('Authorization');
 
     console.log(token);
 
