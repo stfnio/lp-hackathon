@@ -21,12 +21,6 @@
     "type": "git",
     "url": "https://github.com/LoyaltyPlant/lp-hackathon.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "create-react-app",
-    "react"
-  ],
   "license": "MIT",
   "devDependencies": {}
 }
