@@ -5,7 +5,6 @@ import GoogleLogin from 'react-google-login'
 import axios from 'axios'
 
 const responseGoogle = response => {
-  debugger
   axios({
     method: 'post',
     url: 'http://localhost:5000/auth',

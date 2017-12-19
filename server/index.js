@@ -9,26 +9,23 @@ const PORT = process.env.PORT || 5000;
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 // Answer API requests.
-app.get('/api', function (req, res) {
+app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
 });
 
-
 // Auth
-app.post('/auth', function (req, res){
-    token = req.header('Authorization');
+app.post('/auth', (req, res) => {
+  token = req.header('Authorization');
 
-    console.log(token);
+  console.log(token);
 
-    res.sendStatus(200);
+  res.sendStatus(200);
 });
 
 // All remaining requests return the React app, so it can handle routing.
-app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
 
-app.listen(PORT, function () {
-  console.log(`Listening on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
