@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   givenToken = req.header('Authorization');
+  if (!givenToken) res.status(404).send('The token is missing');
   const decodedToken = jwt.decode(givenToken, config.GOOGLE_API_SECRET, true);
 
   UserModel.findOne({
