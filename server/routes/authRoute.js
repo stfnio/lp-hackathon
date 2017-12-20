@@ -1,15 +1,31 @@
-const config = require('../config')
+const config = require('../config');
 const jwt = require('jwt-simple');
-const UserModel = require('../models/user')
+const UserModel = require('../models/user');
 const express = require('express');
 const router = express.Router();
 
 router.post('/', function (req, res){
-    token = req.header('Authorization');
+    givenToken = req.header('Authorization');
+    var decodedToken = jwt.decode(givenToken, config.GOOGLE_API_SECRET, true);
 
-    // decode JWT and process a user
-
-    res.sendStatus(200);
+    UserModel.findOne({ email: decodedToken.email}).exec(function(err, user) {
+        if (err) throw err;
+        if (user) {
+            user.token = givenToken;
+            user.save(function(err) {
+                if (err) throw err;
+            });
+            res.set('Content-Type', 'application/json');
+            res.status(200).send(user);
+        } else {
+            var user = new UserModel({ email: decodedToken.email, name: decodedToken.name, picture: decodedToken.picture, balance: 0, token: givenToken});
+            user.save(function(err) {
+                if (err) throw err;
+            })
+            res.set('Content-Type', 'application/json');
+            res.status(201).send(user);
+        }
+    });
 });
 
 module.exports = router;
