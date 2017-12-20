@@ -17,6 +17,10 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   },
+  group: {
+    type: Schema.ObjectId,
+    ref: 'Group'
+  },
   token: {
     type: String,
     required: true
