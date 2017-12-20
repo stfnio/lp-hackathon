@@ -3,7 +3,9 @@ const path = require('path');
 const config = require('./config')
 const UserModel = require('./models/user');
 const cors = require('cors')
-
+const authRoute = require('./routes/authRoute');
+const rewardsRoute = require('./routes/rewardsRoute');
+const authRequired = require('./middleware/authRequired');
 const app = express();
 
 const mongoose = require('mongoose');
@@ -17,8 +19,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const PORT = process.env.PORT || 5000;
 
-const authRoute = require('./routes/authRoute');
-
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
@@ -29,32 +29,8 @@ app.use(cors({
 
 app.use('/auth', authRoute);
 
-app.use((req, res, next) => {
-  if (req.originalUrl === '/' || req.originalUrl === '/auth' || req.originalUrl.startsWith('/static')) {
-    return next();
-  } else {
-    const givenToken = req.header('Authorization');
-
-    if (givenToken) {
-      UserModel.findOne({token: givenToken}).exec((err, user) => {
-        if (err) throw err;
-        
-        if (user) {
-          return next();
-        } else {
-          res.sendStatus(403);
-        }
-      });
-    } else {
-      res.sendStatus(403);
-    }
-  }
-});
-
-app.get('/api', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  res.send('{"message":"Hello from the custom server!"}');
-});
+app.get('/api/*', authRequired);
+app.use('/api/rewards', rewardsRoute);
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (req, res) => {
