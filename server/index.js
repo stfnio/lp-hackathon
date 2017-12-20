@@ -6,13 +6,13 @@ const cors = require('cors')
 
 const app = express();
 
-var mongoose = require('mongoose');
-var mongoDB = 'mongodb://heroku_ls71pk2d:mru8v2efleiq8e8auncsblsbdi@ds159776.mlab.com:59776/heroku_ls71pk2d';
+const mongoose = require('mongoose');
+const mongoDB = 'mongodb://heroku_ls71pk2d:mru8v2efleiq8e8auncsblsbdi@ds159776.mlab.com:59776/heroku_ls71pk2d';
 mongoose.connect(mongoDB, {
   useMongoClient: true
 });
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const PORT = process.env.PORT || 5000;
@@ -29,14 +29,16 @@ app.use(cors({
 
 app.use('/auth', authRoute);
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   if (req.originalUrl === '/' || req.originalUrl === '/auth' || req.originalUrl.startsWith('/static')) {
     return next();
   } else {
-    var givenToken = req.header('Authorization');
+    const givenToken = req.header('Authorization');
+
     if (givenToken) {
-      UserModel.findOne({token: givenToken}).exec(function (err, user) {
+      UserModel.findOne({token: givenToken}).exec((err, user) => {
         if (err) throw err;
+        
         if (user) {
           return next();
         } else {
