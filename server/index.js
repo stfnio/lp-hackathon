@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const config = require('./config')
 const UserModel = require('./models/user');
+const cors = require('cors')
 
 const app = express();
 
@@ -21,13 +22,10 @@ const authRoute = require('./routes/authRoute');
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+app.use(cors({
+  origin: 'http://localhost:3000',
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use('/auth', authRoute);
 
@@ -51,16 +49,14 @@ app.use(function (req, res, next) {
   }
 });
 
-app.get('/api', function (req, res) {
+app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"Hello from the custom server!"}');
 });
 
 // All remaining requests return the React app, so it can handle routing.
-app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
 
-app.listen(PORT, function () {
-  console.log(`Listening on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
