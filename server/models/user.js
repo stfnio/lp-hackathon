@@ -21,6 +21,12 @@ const UserSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Group'
   },
+  role: {
+    type: String, 
+    required: true, 
+    enum: ['User', 'Manager', 'Admin'],
+    default: 'User'
+  },
   token: {
     type: String,
     required: true
