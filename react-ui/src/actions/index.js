@@ -1,31 +1,25 @@
 import axios from 'axios';
-import {
-  AUTH_USER
-} from './types';
+import { AUTH_USER } from './types';
 
 const ROOT_URL = 'http://localhost:5000';
 
-export function logInUser({
-    tokenId
-  },
-  redirectToHomePage
-) {
+export function logInUser({ tokenId }, redirectToHomePage) {
   return dispatch => {
-    axios.post({
-      method: 'post',
-      url: `${ROOT_URL}/auth`,
-      headers: {
-        'Authorization': tokenId
-      }
-    }).then((user) => {
-      dispatch({
-        type: AUTH_USER
+    axios({
+        method: 'post',
+        url: `${ROOT_URL}/auth`,
+        headers: {
+          Authorization: tokenId
+        }
       })
+      .then(user => {
+        dispatch({
+          type: AUTH_USER
+        });
 
-      localStorage.setItem('token', tokenId);
-      localStorage.setItem('user', user);
+        localStorage.setItem('token', tokenId);
 
-      redirectToHomePage();
-    })
-  }
+        redirectToHomePage();
+      });
+  };
 }
