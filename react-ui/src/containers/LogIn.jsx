@@ -1,14 +1,20 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { logInUser } from '../actions/index'
-import GoogleLogin from 'react-google-login'
-import { withRouter } from "react-router-dom"
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { logInUser } from '../actions/index';
+import GoogleLogin from 'react-google-login';
+import { withRouter } from 'react-router-dom';
 
 class LogIn extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onGoogleLoginSuccess = this.onGoogleLoginSuccess.bind(this);
+  }
+
   onGoogleLoginSuccess(userData) {
     this.props.logInUser(userData, () => {
-      this.props.history.push('/home')
-    })
+      this.props.history.push('/home');
+    });
   }
 
   render() {
@@ -16,11 +22,11 @@ class LogIn extends Component {
       <GoogleLogin
         clientId="120629828527-jl2cpi3vok1u75s2fdc8sn0tuibbkedu.apps.googleusercontent.com"
         buttonText="LogIn via Google"
-        onSuccess={() => this.onGoogleLoginSuccess}
+        onSuccess={this.onGoogleLoginSuccess}
         // onFailure={onGoogleLoginSuccessFailure}
       />
-    )
+    );
   }
 }
 
-export default withRouter(connect(null, { logInUser })(LogIn))
+export default withRouter(connect(null, { logInUser })(LogIn));
