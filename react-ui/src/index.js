@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
 import registerServiceWorker from './registerServiceWorker';
 
 import App from './components/App';
@@ -16,7 +16,11 @@ import PrivateRoute from './containers/PrivateRoute';
 import reducers from './reducers/index';
 import { AUTH_USER } from './actions/types';
 
-const store = createStore(reducers, applyMiddleware(reduxThunk));
+const store = createStore(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(reduxThunk)
+);
 
 const token = localStorage.getItem('token');
 // update application state with token information if needed
@@ -24,7 +28,7 @@ if (token) {
   // update authentication flag
   const decoded_token = jwt_decode(token);
 
-  console.log(decoded_token)
+  console.log(decoded_token);
 
   store.dispatch({ type: AUTH_USER });
 }
