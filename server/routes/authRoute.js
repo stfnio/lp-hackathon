@@ -13,22 +13,20 @@ router.post("/", (req, res) => {
   if (!token) res.status(404).send("The token is missing");
 
   if (jwk) {
-    doStuff(token, res);
+    handleAuth(token, res);
   } else {
     axios
       .get("https://accounts.google.com/.well-known/openid-configuration")
       .then(function(response) {
-        console.log(response);
         axios.get(response.data.jwks_uri).then(function(response) {
-          console.log(response);
           jwk = response.data;
-          doStuff(token, res);
+          handleAuth(token, res);
         });
       });
   }
 });
 
-function doStuff(token, res) {
+function handleAuth(token, res) {
   jws.verify(token, jwk);
   payload = jwt.decode(token, "", true);
 
