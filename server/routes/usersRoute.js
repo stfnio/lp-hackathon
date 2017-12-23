@@ -3,7 +3,7 @@ const router = express.Router();
 const UserModel = require("../models/user");
 
 router.get("/", (req, res) => {
-  UserModel.find().exec(function(err, user) {
+  UserModel.find().exec((err, user) => {
     if (err) throw err;
     res.status(200).json(user);
   });

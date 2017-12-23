@@ -17,8 +17,8 @@ router.post("/", (req, res) => {
   } else {
     axios
       .get("https://accounts.google.com/.well-known/openid-configuration")
-      .then(function(response) {
-        axios.get(response.data.jwks_uri).then(function(response) {
+      .then((response) => {
+        axios.get(response.data.jwks_uri).then((response) => {
           jwk = response.data;
           handleAuth(token, res);
         });
