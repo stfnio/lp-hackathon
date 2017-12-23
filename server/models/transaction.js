@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TransactionSchema = new Schema({
@@ -9,7 +9,7 @@ const TransactionSchema = new Schema({
   operationType: {
     type: String,
     required: true,
-    enum: ['Accrual', 'Debit']
+    enum: ["Accrual", "Debit"]
   },
   amount: {
     type: Number,
@@ -19,6 +19,6 @@ const TransactionSchema = new Schema({
     type: Schema.ObjectId,
     ref: Reward
   }
-})
+});
 
-module.exports = mongoose.model('Transaction', TransactionSchema);
+module.exports = mongoose.model("Transaction", TransactionSchema);

@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("path");
 const config = require("./config");
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const UserModel = require("./models/user");
 const cors = require("cors");
 const authRoute = require("./routes/authRoute");
@@ -35,7 +35,7 @@ app.use(
 
 app.use("/auth", authRoute);
 
-app.use("/api/", authRequired, bodyParser.json(), morgan('tiny'));
+app.use("/api/", authRequired, bodyParser.json(), morgan("tiny"));
 app.use("/api/rewards", rewardsRoute);
 app.use("/api/users", usersRoute);
 

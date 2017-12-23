@@ -9,4 +9,11 @@ router.post("/", (req, res) => {
   });
 });
 
+router.post("/fromValidator", (req, res) => {
+  TransactionModel.find().exec(function(err, transacton) {
+    if (err) throw err;
+    res.sendStatus(200).send(transacton);
+  });
+});
+
 module.exports = router;
