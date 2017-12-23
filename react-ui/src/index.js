@@ -30,7 +30,7 @@ if (token) {
 
   console.log(decoded_token);
 
-  store.dispatch({ type: LOG_IN_USER });
+  store.dispatch({ type: LOG_IN_USER, payload: { token } });
 }
 
 ReactDOM.render(

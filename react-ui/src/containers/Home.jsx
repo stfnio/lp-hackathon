@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 export default class Home extends Component {
   componentWillMount() {
-    this.props.fetchMessage();
+    // this.props.fetchMessage();
   }
 
   render() {
