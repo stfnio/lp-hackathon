@@ -36,8 +36,9 @@ function handleAuth(token, res) {
     if (err) throw err;
 
     if (user) {
-      res.set("Content-Type", "application/json");
-      res.status(200).send({ token: jwt.encode(user, config.GOOGLE_API_SECRET)});
+      res
+        .status(200)
+        .json({ token: jwt.encode(user, config.GOOGLE_API_SECRET) });
     } else {
       const user = new UserModel({
         email: payload.email,
@@ -49,8 +50,9 @@ function handleAuth(token, res) {
         if (err) throw err;
       });
 
-      res.set("Content-Type", "application/json");
-      res.status(201).send({ token: jwt.encode(user, config.GOOGLE_API_SECRET)});
+      res
+        .status(201)
+        .json({ token: jwt.encode(user, config.GOOGLE_API_SECRET) });
     }
   });
 }
