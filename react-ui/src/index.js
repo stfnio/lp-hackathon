@@ -25,10 +25,9 @@ const store = createStore(
 const token = localStorage.getItem('token');
 // update application state with token information if needed
 if (token) {
-  // update authentication flag
-  // const decoded_token = jwt_decode(token);
+  const decoded_token = jwt_decode(token);
 
-  // console.log(decoded_token);
+  console.log(decoded_token);
 
   store.dispatch({ type: LOG_IN_USER });
 }
