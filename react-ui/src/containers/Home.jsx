@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 // import * as actions from '../actions';
 
 export default class Home extends Component {
-  // componentWillMount() {
-  //   this.props.fetchMessage();
-  // }
+  componentWillMount() {
+    this.props.fetchMessage();
+  }
 
   render() {
     return (

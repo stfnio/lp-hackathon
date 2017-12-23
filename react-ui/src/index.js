@@ -14,7 +14,7 @@ import LogIn from './containers/LogIn';
 import PrivateRoute from './containers/PrivateRoute';
 
 import reducers from './reducers/index';
-import { AUTH_USER } from './actions/types';
+import { LOG_IN_USER } from './actions/types';
 
 const store = createStore(
   reducers,
@@ -30,7 +30,7 @@ if (token) {
 
   console.log(decoded_token);
 
-  store.dispatch({ type: AUTH_USER });
+  store.dispatch({ type: LOG_IN_USER });
 }
 
 ReactDOM.render(
