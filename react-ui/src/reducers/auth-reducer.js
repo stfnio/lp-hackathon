@@ -1,28 +1,33 @@
-import {
-  AUTH_USER,
-  AUTH_ERROR
-} from '../actions/types'
+import { LOG_IN_USER, LOG_IN_ERROR, LOG_OUT_USER } from '../actions/types';
 
-export default function (
+export default function(
   state = {
     authenticated: false
   },
   action
 ) {
-
   switch (action.type) {
-    case AUTH_USER:
+    case LOG_IN_USER:
       return {
         ...state,
         error: '',
+        token: action.payload.token,
         authenticated: true
       };
-    case AUTH_ERROR:
+    case LOG_OUT_USER:
       return {
         ...state,
-        error: action.payload
+        error: '',
+        token: null,
+        authenticated: false
+      };
+    case LOG_IN_ERROR:
+      return {
+        ...state,
+        token: null,
+        error: action.payload.error
       };
     default:
-      return state
+      return state;
   }
 }

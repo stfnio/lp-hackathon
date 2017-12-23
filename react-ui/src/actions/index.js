@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_USER } from './types';
+import { LOG_IN_USER } from './types';
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -11,12 +11,15 @@ export function logInUser({ tokenId }, redirectToHomePage) {
       headers: {
         Authorization: tokenId
       }
-    }).then(user => {
+    }).then(({ enhancedToken }) => {
       dispatch({
-        type: AUTH_USER
+        type: LOG_IN_USER,
+        payload: {
+          token: enhancedToken
+        }
       });
 
-      localStorage.setItem('token', tokenId);
+      localStorage.setItem('token', enhancedToken);
 
       redirectToHomePage();
     });
