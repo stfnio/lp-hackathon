@@ -1,10 +1,13 @@
 const express = require("express");
 const path = require("path");
 const config = require("./config");
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const UserModel = require("./models/user");
 const cors = require("cors");
 const authRoute = require("./routes/authRoute");
 const rewardsRoute = require("./routes/rewardsRoute");
+const usersRoute = require("./routes/usersRoute");
 const authRequired = require("./middleware/authRequired");
 const app = express();
 
@@ -29,8 +32,9 @@ app.use(
 
 app.use("/auth", authRoute);
 
-app.use("/api/", authRequired);
+app.use("/api/", authRequired, bodyParser.json(), morgan('tiny'));
 app.use("/api/rewards", rewardsRoute);
+app.use("/api/users", usersRoute);
 
 // All remaining requests return the React app, so it can handle routing.
 app.get("*", (req, res) => {
