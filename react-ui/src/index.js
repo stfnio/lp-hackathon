@@ -12,10 +12,11 @@ import App from './components/App';
 import Home from './containers/Home';
 import LogIn from './containers/LogIn';
 import RewardShow from './containers/RewardShow';
+import RewardQRCode from './containers/RewardQRCode';
 import PrivateRoute from './containers/PrivateRoute';
 
 import reducers from './reducers/index';
-import { LOG_IN_USER } from './actions/types';
+import { LOG_IN_USER, SET_USER } from './actions/types';
 
 const store = createStore(
   reducers,
@@ -26,11 +27,10 @@ const store = createStore(
 const token = localStorage.getItem('token');
 // update application state with token information if needed
 if (token) {
-  const decoded_token = jwt_decode(token);
-
-  console.log(decoded_token);
+  const user = jwt_decode(token);
 
   store.dispatch({ type: LOG_IN_USER });
+  store.dispatch({ type: SET_USER, payload: user });
 }
 
 ReactDOM.render(
@@ -39,6 +39,7 @@ ReactDOM.render(
       <App>
         <Switch>
           <Route path="/login" component={LogIn} />
+          <PrivateRoute path="/rewards/:id/qr-code" component={RewardQRCode} />
           <PrivateRoute path="/rewards/:id" component={RewardShow} />
           <PrivateRoute path="/" component={Home} />
         </Switch>

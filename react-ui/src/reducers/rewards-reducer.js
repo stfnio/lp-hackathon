@@ -7,7 +7,7 @@ export default function(state = {}, action) {
       return _.mapKeys(action.payload, '_id');
     case FETCH_REWARD:
       const reward = action.payload;
-      return { ...state, [reward.id]: reward };
+      return { ...state, [reward._id]: reward };
     default:
       return state;
   }
