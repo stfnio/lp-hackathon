@@ -7,8 +7,8 @@
   },
   "scripts": {
     "start": "node server",
-    "debug": "node --nolazy --inspect-brk=9229 server/index.js",
-    "heroku-postbuild": "cd react-ui/ && yarn && yarn build"
+    "heroku-postbuild": "cd react-ui/ && yarn && yarn build",
+    "debug": "node --nolazy --inspect-brk=9229 server/index.js"
   },
   "cacheDirectories": [
     "node_modules",

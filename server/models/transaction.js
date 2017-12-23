@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const TransactionSchema = new Schema({
   user: {
     type: Schema.ObjectId,
-    ref: User
+    ref: "User"
   },
   operationType: {
     type: String,
@@ -17,7 +17,7 @@ const TransactionSchema = new Schema({
   },
   reward: {
     type: Schema.ObjectId,
-    ref: Reward
+    ref: "Reward"
   }
 });
 

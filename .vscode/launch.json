@@ -8,18 +8,12 @@
             "type": "node",
             "request": "launch",
             "name": "Launch via NPM",
-            "runtimeExecutable": "npm",
+            "runtimeExecutable": "/home/steve/.nvm/versions/node/v8.9.3/bin/npm",
             "runtimeArgs": [
                 "run-script",
                 "debug"
             ],
             "port": 9229
-        },
-        // {
-        //     "type": "node",
-        //     "request": "launch",
-        //     "name": "Launch Program",
-        //     "program": "${workspaceFolder}/server"
-        // }
+        }
     ]
 }
