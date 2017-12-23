@@ -11,12 +11,12 @@ export function logInUser({ tokenId }, redirectToHomePage) {
       headers: {
         Authorization: tokenId
       }
-    }).then(({ token }) => {
+    }).then(res => {
       dispatch({
         type: LOG_IN_USER
       });
 
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', res.data.token);
 
       redirectToHomePage();
     });
@@ -31,10 +31,10 @@ export function fetchRewards() {
       headers: {
         Authorization: localStorage.getItem('token')
       }
-    }).then(rewards => {
+    }).then(res => {
       dispatch({
         type: FETCH_REWARDS,
-        payload: rewards
+        payload: res.data
       });
     });
   };

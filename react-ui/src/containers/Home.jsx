@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRewards } from '../actions';
+import _ from 'lodash';
 
 import RewardCard from '../components/RewardCard';
 
 class Home extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchRewards();
   }
 
   renderRewards() {
-    return this.props.rewards.map(reward => {
+    return _.map(this.props.rewards, reward => {
       return (
         <div key={reward._id}>
           <RewardCard reward={reward} />
