@@ -4,7 +4,7 @@ const jwt = require("jwt-simple");
 
 module.exports = (req, res, next) => {
   const token = req.header("Authorization");
-console.log(token)
+
   if (token) {
     const payload = jwt.decode(token, config.GOOGLE_API_SECRET);
 
