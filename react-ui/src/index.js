@@ -11,6 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 import Home from './containers/Home';
 import LogIn from './containers/LogIn';
+import RewardShow from './containers/RewardShow';
 import PrivateRoute from './containers/PrivateRoute';
 
 import reducers from './reducers/index';
@@ -38,6 +39,7 @@ ReactDOM.render(
       <App>
         <Switch>
           <Route path="/login" component={LogIn} />
+          <PrivateRoute path="/rewards/:id" component={RewardShow} />
           <PrivateRoute path="/" component={Home} />
         </Switch>
       </App>
