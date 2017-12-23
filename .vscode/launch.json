@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch via NPM",
-            "runtimeExecutable": "/home/steve/.nvm/versions/node/v8.9.3/bin/npm",
+            "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run-script",
                 "debug"
