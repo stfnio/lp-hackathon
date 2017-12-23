@@ -6,7 +6,7 @@ const UserModel = require("../models/user");
 const express = require("express");
 const router = express.Router();
 
-var jwk;
+let jwk;
 
 router.post("/", (req, res) => {
   token = req.header("Authorization");

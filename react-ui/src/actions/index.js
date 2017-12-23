@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOG_IN_USER } from './types';
+import { LOG_IN_USER, FETCH_REWARDS } from './types';
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -11,17 +11,31 @@ export function logInUser({ tokenId }, redirectToHomePage) {
       headers: {
         Authorization: tokenId
       }
-    }).then(({ enhancedToken }) => {
+    }).then(({ token }) => {
       dispatch({
-        type: LOG_IN_USER,
-        payload: {
-          token: enhancedToken
-        }
+        type: LOG_IN_USER
       });
 
-      localStorage.setItem('token', enhancedToken);
+      localStorage.setItem('token', token);
 
       redirectToHomePage();
+    });
+  };
+}
+
+export function fetchRewards() {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${ROOT_URL}/api/rewards`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(rewards => {
+      dispatch({
+        type: FETCH_REWARDS,
+        payload: rewards
+      });
     });
   };
 }

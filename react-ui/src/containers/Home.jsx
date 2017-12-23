@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import * as actions from '../actions';
+import { connect } from 'react-redux';
+import { fetchRewards } from '../actions';
 
-export default class Home extends Component {
+import RewardCard from '../components/RewardCard';
+
+class Home extends Component {
   componentWillMount() {
-    // this.props.fetchMessage();
+    this.props.fetchRewards();
+  }
+
+  renderRewards() {
+    return this.props.rewards.map(reward => {
+      return (
+        <div key={reward._id}>
+          <RewardCard reward={reward} />
+        </div>
+      );
+    });
   }
 
   render() {
     return (
-      <div>Home</div>
-      // <div className="msg">{this.props.message}</div>
+      <div>
+        <div>Home</div>
+        {this.renderRewards()}
+      </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   return { message: state.auth.message };
-// }
+function mapStateToProps(state) {
+  return {
+    rewards: state.rewards
+  };
+}
 
-// export default connect(mapStateToProps, actions)(ProtectedContent);
+export default connect(mapStateToProps, { fetchRewards })(Home);

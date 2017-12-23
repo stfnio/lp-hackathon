@@ -2,11 +2,12 @@ const UserModel = require("../models/user");
 const config = require("../config");
 const jwt = require("jwt-simple");
 
-var authLogic = function(req, res, next) {
+module.exports = (req, res, next) => {
   const token = req.header("Authorization");
-
+console.log(token)
   if (token) {
-    var payload = jwt.decode(token, config.GOOGLE_API_SECRET);
+    const payload = jwt.decode(token, config.GOOGLE_API_SECRET);
+
     UserModel.findOne({ email: payload.email }).exec((err, user) => {
       if (err) throw err;
 
@@ -20,5 +21,3 @@ var authLogic = function(req, res, next) {
     res.sendStatus(403);
   }
 };
-
-module.exports = authLogic;
