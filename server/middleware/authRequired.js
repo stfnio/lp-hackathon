@@ -1,10 +1,13 @@
-const UserModel = require('../models/user');
+const UserModel = require("../models/user");
+const config = require("../config");
+const jwt = require("jwt-simple");
 
-module.exports = (req, res, next) => {
-  const givenToken = req.header('Authorization');
+var authLogic = function(req, res, next) {
+  const token = req.header("Authorization");
 
-  if (givenToken) {
-    UserModel.findOne({ token: givenToken }).exec((err, user) => {
+  if (token) {
+    var payload = jwt.decode(token, config.GOOGLE_API_SECRET);
+    UserModel.findOne({ email: payload.email }).exec((err, user) => {
       if (err) throw err;
 
       if (user) {
@@ -17,3 +20,5 @@ module.exports = (req, res, next) => {
     res.sendStatus(403);
   }
 };
+
+module.exports = authLogic;

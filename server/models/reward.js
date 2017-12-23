@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const RewardSchema = new Schema({
@@ -18,6 +18,6 @@ const RewardSchema = new Schema({
     type: String,
     required: true
   }
-})
+});
 
-module.exports = mongoose.model('Reward', RewardSchema);
+module.exports = mongoose.model("Reward", RewardSchema);
