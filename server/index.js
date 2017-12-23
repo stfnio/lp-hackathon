@@ -23,9 +23,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const PORT = process.env.PORT || 5000;
 
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
-
 app.use(
   cors({
     origin: "http://localhost:3000",

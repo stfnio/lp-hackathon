@@ -11,21 +11,18 @@ export default function(
       return {
         ...state,
         error: '',
-        token: action.payload.token,
         authenticated: true
       };
     case LOG_OUT_USER:
       return {
         ...state,
         error: '',
-        token: null,
         authenticated: false
       };
     case LOG_IN_ERROR:
       return {
         ...state,
-        token: null,
-        error: action.payload.error
+        error: action.payload
       };
     default:
       return state;
