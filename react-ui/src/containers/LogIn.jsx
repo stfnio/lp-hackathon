@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import '../styles/LogIn.css';
 import { connect } from 'react-redux';
 import { logInUser } from '../actions/index';
 import GoogleLogin from 'react-google-login';
 import { withRouter } from 'react-router-dom';
+
+import GoogleIcon from '../components/GoogleIcon';
 
 class LogIn extends Component {
   constructor(props) {
@@ -19,12 +22,25 @@ class LogIn extends Component {
 
   render() {
     return (
-      <GoogleLogin
-        clientId="120629828527-jl2cpi3vok1u75s2fdc8sn0tuibbkedu.apps.googleusercontent.com"
-        buttonText="LogIn via Google"
-        onSuccess={this.onGoogleLoginSuccess}
-        // onFailure={onGoogleLoginSuccessFailure}
-      />
+      <div>
+        <h1 className="main-greeting">С новым годом!</h1>
+        <div className="login-button-wrapper">
+          <GoogleIcon
+            style={{
+              marginRight: 24,
+              color: '#fff'
+            }}
+            className="google-icon"
+          />
+          <GoogleLogin
+            clientId="120629828527-jl2cpi3vok1u75s2fdc8sn0tuibbkedu.apps.googleusercontent.com"
+            buttonText="Начать вечеринку"
+            onSuccess={this.onGoogleLoginSuccess}
+            className="login-button"
+            // onFailure={onGoogleLoginSuccessFailure}
+          />
+        </div>
+      </div>
     );
   }
 }
