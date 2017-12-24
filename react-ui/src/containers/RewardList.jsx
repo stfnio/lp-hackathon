@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchRewards } from '../actions';
 import _ from 'lodash';
-import '../styles/RewardList.css'
+import '../styles/RewardList.css';
 
 import RewardCard from '../components/RewardCard';
 
@@ -15,10 +15,13 @@ class RewardList extends Component {
     const { rewards } = this.props;
 
     return (
-      <div className="reward-list">
-        {_.map(rewards, reward => (
-          <RewardCard reward={reward} key={reward._id} />
-        ))}
+      <div>
+        <h2 style={{ color: '#fff' }}>Награды</h2>
+        <div className="reward-list">
+          {_.map(rewards, reward => (
+            <RewardCard reward={reward} key={reward._id} />
+          ))}
+        </div>
       </div>
     );
   }

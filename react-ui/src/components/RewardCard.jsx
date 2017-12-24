@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/RewardCard.css';
-import FontIcon from 'material-ui/FontIcon';
+import ShowPoints from '../components/ShowPoints';
 
 export default ({ reward }) => {
   const imageUrl = `http://localhost:5000/images/${reward.picture}`;
@@ -9,26 +9,15 @@ export default ({ reward }) => {
   return (
     <Link to={`rewards/${reward._id}`} className="reward-card">
       <div
-        className="reward-image"
+        className="reward-card-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
-        <div className="reward-price">
-          {reward.price}
-          <FontIcon
-            className="material-icons"
-            style={{
-              color: '#fff',
-              fontSize: 18,
-              marginLeft: 4,
-              verticalAlign: 'text-bottom'
-            }}
-          >
-            star
-          </FontIcon>
+        <div className="reward-card-price">
+          <ShowPoints points={reward.price} />
         </div>
       </div>
       <div className="reward-caption">
-        <div className="reward-title">{reward.title}</div>
+        <div className="reward-card-title">{reward.title}</div>
       </div>
     </Link>
   );
