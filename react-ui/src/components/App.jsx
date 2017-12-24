@@ -9,12 +9,22 @@ import { withRouter } from 'react-router-dom';
 import UserInfo from '../components/UserInfo';
 import Divider from 'material-ui/Divider';
 import Exit from 'material-ui/svg-icons/action/exit-to-app';
+import {
+  BottomNavigation,
+  BottomNavigationItem
+} from 'material-ui/BottomNavigation';
+import FontIcon from 'material-ui/FontIcon';
+
+const rewards = <FontIcon className="material-icons">card_giftcard</FontIcon>;
+const team = <FontIcon className="material-icons">group</FontIcon>;
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isMenuOpen: false
+      isMenuOpen: false,
+      selectedAppSectionIndex: 0
     };
   }
 
@@ -24,6 +34,8 @@ class App extends Component {
     });
 
   redirectHome = () => this.props.history.push('/home');
+
+  selectAppSection = index => this.setState({ selectedAppSectionIndex: index });
 
   render() {
     return (
@@ -51,6 +63,22 @@ class App extends Component {
         </Drawer>
 
         <div className="container">{this.props.children}</div>
+
+        <BottomNavigation
+          style={{ position: 'fixed', bottom: 0 }}
+          selectedIndex={this.state.selectedAppSectionIndex}
+        >
+          <BottomNavigationItem
+            label="Награды"
+            icon={rewards}
+            onClick={() => this.selectAppSection(0)}
+          />
+          <BottomNavigationItem
+            label="Команда"
+            icon={team}
+            onClick={() => this.selectAppSection(1)}
+          />
+        </BottomNavigation>
       </div>
     );
   }
