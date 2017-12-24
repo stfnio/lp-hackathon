@@ -15,7 +15,14 @@ class RewardShow extends Component {
       return <div>Loading...</div>;
     }
 
-    return <div>{this.props.reward.title}</div>;
+    const imageUrl = `http://localhost:5000/images/${reward.picture}`;
+
+    return (
+      <div>
+        {reward.title}
+        <img src={imageUrl} />
+      </div>
+    );
   }
 }
 
