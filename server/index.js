@@ -8,6 +8,7 @@ const cors = require('cors');
 const authRoute = require('./routes/authRoute');
 const rewardsRoute = require('./routes/rewardsRoute');
 const transactionsRoute = require('./routes/transactionsRoute');
+const groupsRoute = require('./routes/groupsRoute');
 const usersRoute = require('./routes/usersRoute');
 const authRequired = require('./middleware/authRequired');
 const app = express();
@@ -36,6 +37,7 @@ app.use('/auth', authRoute);
 app.use('/api/', authRequired, bodyParser.json(), morgan('tiny'));
 app.use('/api/rewards', rewardsRoute);
 app.use('/api/transactions', transactionsRoute);
+app.use('/api/groups', groupsRoute);
 app.use('/api/users', usersRoute);
 
 app.get('/images/:id', (req, res) => {
