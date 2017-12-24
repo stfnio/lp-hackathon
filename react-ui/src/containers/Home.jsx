@@ -1,10 +1,9 @@
 import React from 'react';
-import RewardList from '../containers/RewardList';
 
 export default () => {
   return (
     <div>
-      <RewardList />
+      <h2 style={{ color: '#fff' }}>Программа</h2>
     </div>
   );
 };

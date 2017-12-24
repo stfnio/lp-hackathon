@@ -12,6 +12,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './components/App';
 import Home from './containers/Home';
 import LogIn from './containers/LogIn';
+import Team from './containers/Team';
+import RewardList from './containers/RewardList';
 import RewardShow from './containers/RewardShow';
 import RewardQRCode from './containers/RewardQRCode';
 import PrivateRoute from './containers/PrivateRoute';
@@ -47,6 +49,8 @@ ReactDOM.render(
                 component={RewardQRCode}
               />
               <PrivateRoute path="/rewards/:id" component={RewardShow} />
+              <PrivateRoute path="/rewards/" component={RewardList} />
+              <PrivateRoute path="/team/" component={Team} />
               <PrivateRoute path="/" component={Home} />
             </Switch>
           </App>

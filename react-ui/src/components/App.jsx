@@ -14,6 +14,7 @@ import {
   BottomNavigationItem
 } from 'material-ui/BottomNavigation';
 import FontIcon from 'material-ui/FontIcon';
+import { logOutUser } from '../actions/index';
 
 const rewards = <FontIcon className="material-icons">card_giftcard</FontIcon>;
 const team = <FontIcon className="material-icons">group</FontIcon>;
@@ -35,7 +36,23 @@ class App extends Component {
 
   redirectHome = () => this.props.history.push('/home');
 
-  selectAppSection = index => this.setState({ selectedAppSectionIndex: index });
+  selectRewardSection = () => {
+    this.setState({ selectedAppSectionIndex: 0 });
+
+    this.props.history.push('/rewards');
+  };
+
+  selectTeamSection = () => {
+    this.setState({ selectedAppSectionIndex: 1 });
+
+    this.props.history.push('/team');
+  };
+
+  logOutUser = () => {
+    this.props.logOutUser(() => {
+      this.props.history.push('/login');
+    });
+  };
 
   render() {
     return (
@@ -59,7 +76,11 @@ class App extends Component {
         >
           <UserInfo user={this.props.user} />
           <Divider />
-          <MenuItem primaryText="Выйти" leftIcon={<Exit />} />
+          <MenuItem
+            primaryText="Выйти"
+            leftIcon={<Exit />}
+            onClick={this.logOutUser}
+          />
         </Drawer>
 
         <div className="container">{this.props.children}</div>
@@ -71,12 +92,12 @@ class App extends Component {
           <BottomNavigationItem
             label="Награды"
             icon={rewards}
-            onClick={() => this.selectAppSection(0)}
+            onClick={() => this.selectRewardSection()}
           />
           <BottomNavigationItem
             label="Команда"
             icon={team}
-            onClick={() => this.selectAppSection(1)}
+            onClick={() => this.selectTeamSection()}
           />
         </BottomNavigation>
       </div>
@@ -90,4 +111,4 @@ function mapStateToProps({ user }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect(mapStateToProps, { logOutUser })(App));
