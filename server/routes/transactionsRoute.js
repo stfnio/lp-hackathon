@@ -7,11 +7,15 @@ const RewardModel = require('../models/reward');
 router.post('/', (req, res) => {
   UserModel.findOne({ _id: req.body.user })
     .then(user => {
-      const success = handleBalanceOperation(user, req.body.operationType, req.body.amount);
+      const success = handleBalanceOperation(
+        user,
+        req.body.operationType,
+        req.body.amount
+      );
       if (success) {
         res.sendStatus(201);
       } else {
-        res.status(400).json({ error: 1})
+        res.status(400).json({ error: 1 });
       }
     })
     .catch(err => {

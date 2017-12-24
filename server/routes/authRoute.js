@@ -43,8 +43,7 @@ function handleAuth(token, res) {
       const user = new UserModel({
         email: payload.email,
         name: payload.name,
-        picture: payload.picture,
-        balance: 0
+        picture: payload.picture
       });
       user.save(err => {
         if (err) throw err;
