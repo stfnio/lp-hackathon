@@ -22,24 +22,26 @@ class LogIn extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className="main-greeting">С новым годом!</h1>
-        <div className="login-button-wrapper">
-          <GoogleIcon
-            style={{
-              marginRight: 24,
-              color: '#fff'
-            }}
-            className="google-icon"
-          />
-          <GoogleLogin
-            clientId="120629828527-jl2cpi3vok1u75s2fdc8sn0tuibbkedu.apps.googleusercontent.com"
-            buttonText="Начать вечеринку"
-            onSuccess={this.onGoogleLoginSuccess}
-            className="login-button"
-            // onFailure={onGoogleLoginSuccessFailure}
-          />
-        </div>
+      <div className="vertical-center">
+
+          <h1 className="main-greeting">С новым годом!</h1>
+          <div className="login-button-wrapper">
+            <GoogleIcon
+              style={{
+                marginRight: 24,
+                color: '#fff'
+              }}
+              className="google-icon"
+            />
+            <GoogleLogin
+              clientId="120629828527-jl2cpi3vok1u75s2fdc8sn0tuibbkedu.apps.googleusercontent.com"
+              buttonText="Начать вечеринку"
+              onSuccess={this.onGoogleLoginSuccess}
+              className="login-button"
+              // onFailure={onGoogleLoginSuccessFailure}
+            />
+          </div>
+
       </div>
     );
   }
