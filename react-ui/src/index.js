@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import jwt_decode from 'jwt-decode';
 import registerServiceWorker from './registerServiceWorker';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import App from './components/App';
 import Home from './containers/Home';
@@ -35,16 +36,21 @@ if (token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <App>
-        <Switch>
-          <Route path="/login" component={LogIn} />
-          <PrivateRoute path="/rewards/:id/qr-code" component={RewardQRCode} />
-          <PrivateRoute path="/rewards/:id" component={RewardShow} />
-          <PrivateRoute path="/" component={Home} />
-        </Switch>
-      </App>
-    </Router>
+    <MuiThemeProvider>
+      <Router>
+        <App>
+          <Switch>
+            <Route path="/login" component={LogIn} />
+            <PrivateRoute
+              path="/rewards/:id/qr-code"
+              component={RewardQRCode}
+            />
+            <PrivateRoute path="/rewards/:id" component={RewardShow} />
+            <PrivateRoute path="/" component={Home} />
+          </Switch>
+        </App>
+      </Router>
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 );

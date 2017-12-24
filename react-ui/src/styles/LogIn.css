@@ -1,0 +1,34 @@
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-greeting {
+  font-size: 53px;
+  color: white;
+  margin-top: 0;
+}
+
+.login-button-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.google-icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.login-button {
+  background-color: #e7a415;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  height: 52px;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+}
