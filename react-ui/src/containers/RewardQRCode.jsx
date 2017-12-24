@@ -21,7 +21,7 @@ class RewardQRCode extends Component {
       reward: reward._id
     });
 
-    return <QRCode value={transaction} />;
+    return <QRCode value={transaction} size={280} />;
   }
 }
 
