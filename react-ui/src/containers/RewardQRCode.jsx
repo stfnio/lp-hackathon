@@ -9,6 +9,10 @@ class RewardQRCode extends Component {
     this.props.fetchReward(id);
   }
 
+  transitionToRewards = () => {
+    this.props.history.push('/rewards');
+  };
+
   render() {
     const { reward, userId } = this.props;
 
@@ -21,7 +25,33 @@ class RewardQRCode extends Component {
       reward: reward._id
     });
 
-    return <QRCode value={transaction} size={280} />;
+    const imageUrl = `http://localhost:5000/images/${reward.picture}`;
+
+    return (
+      <div>
+        <div
+          style={{
+            backgroundImage: `url(${imageUrl}`
+          }}
+          className="reward-image"
+        />
+        <div className="reward-details">
+          <div className="reward-qr-code-wrapper">
+            <div className="reward-qr-code">
+              <QRCode value={transaction} size={200} />;
+            </div>
+          </div>
+          <div className="reward-title">{reward.title}</div>
+          <div className="reward-description">{reward.description}</div>
+          <div
+            className="reward-button"
+            onClick={() => this.transitionToRewards()}
+          >
+            Готово
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

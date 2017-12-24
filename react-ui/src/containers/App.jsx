@@ -66,6 +66,7 @@ class App extends Component {
           }
           onLeftIconButtonClick={this.toggleMenu}
           onTitleClick={this.redirectHome}
+          style={{ position: 'absolute' }}
         />
 
         <Drawer

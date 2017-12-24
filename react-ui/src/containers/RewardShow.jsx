@@ -10,6 +10,10 @@ class RewardShow extends Component {
     this.props.fetchReward(id);
   }
 
+  showQRCode = () => {
+    this.props.history.push(`${this.props.location.pathname}/qr-code`);
+  };
+
   render() {
     const { reward } = this.props;
 
@@ -34,7 +38,9 @@ class RewardShow extends Component {
             <ShowPoints points={reward.price} />
           </div>
 
-          <div className="reward-button">Получить подарок</div>
+          <div className="reward-button" onClick={() => this.showQRCode()}>
+            Получить подарок
+          </div>
         </div>
       </div>
     );

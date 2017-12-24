@@ -1,8 +1,9 @@
 .App {
-  height: 100%;
+  height: calc(100% - 64px);
 }
 .container {
   padding: 24px;
+  padding-top: 64px;
   height: 100%;
   position: relative;
 }

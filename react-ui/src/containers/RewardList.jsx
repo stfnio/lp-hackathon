@@ -15,7 +15,7 @@ class RewardList extends Component {
     const { rewards } = this.props;
 
     return (
-      <div>
+      <div style={{ paddingBottom: 56 }}>
         <h2 style={{ color: '#fff' }}>Награды</h2>
         <div className="reward-list">
           {_.map(rewards, reward => (

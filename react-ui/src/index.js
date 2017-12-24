@@ -9,7 +9,7 @@ import jwt_decode from 'jwt-decode';
 import registerServiceWorker from './registerServiceWorker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import App from './components/App';
+import App from './containers/App';
 import Home from './containers/Home';
 import LogIn from './containers/LogIn';
 import Team from './containers/Team';
