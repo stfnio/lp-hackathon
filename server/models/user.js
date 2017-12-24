@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -19,14 +19,14 @@ const UserSchema = new Schema({
   },
   group: {
     type: Schema.ObjectId,
-    ref: "Group"
+    ref: 'Group'
   },
   role: {
     type: String,
     required: true,
-    enum: ["User", "Manager", "Admin"],
-    default: "User"
+    enum: ['User', 'Manager', 'Admin'],
+    default: 'User'
   }
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

@@ -27,11 +27,9 @@ router.post('/', (req, res) => {
     name: req.body.name,
     users: []
   });
-  group
-    .save()
-    .catch(err => {
-      throw err;
-    });
+  group.save().catch(err => {
+    throw err;
+  });
   res.sendStatus(201);
 });
 

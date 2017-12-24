@@ -11,6 +11,8 @@ const transactionsRoute = require('./routes/transactionsRoute');
 const groupsRoute = require('./routes/groupsRoute');
 const usersRoute = require('./routes/usersRoute');
 const authRequired = require('./middleware/authRequired');
+const adminRequired = require('./middleware/adminRequired');
+const managerRequired = require('./middleware/managerRequired');
 const app = express();
 
 const mongoose = require('mongoose');
@@ -36,9 +38,9 @@ app.use('/auth', authRoute);
 
 app.use('/api/', authRequired, bodyParser.json(), morgan('tiny'));
 app.use('/api/rewards', rewardsRoute);
-app.use('/api/transactions', transactionsRoute);
-app.use('/api/groups', groupsRoute);
-app.use('/api/users', usersRoute);
+app.use('/api/transactions', managerRequired, transactionsRoute);
+app.use('/api/groups', managerRequired, groupsRoute);
+app.use('/api/users', adminRequired, usersRoute);
 
 app.get('/images/:id', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'images/', req.params.id))
