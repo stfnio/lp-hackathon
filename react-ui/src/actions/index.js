@@ -8,13 +8,11 @@ import {
   SET_USER
 } from './types';
 
-const ROOT_URL = '';
-
 export function logInUser({ tokenId }, redirectToHomePage) {
   return dispatch => {
     axios({
       method: 'post',
-      url: `${ROOT_URL}/auth`,
+      url: `${window.ROOT_URL}/auth`,
       headers: {
         Authorization: tokenId
       }
@@ -46,7 +44,7 @@ export function fetchRewards() {
   return dispatch => {
     axios({
       method: 'get',
-      url: `${ROOT_URL}/api/rewards`,
+      url: `${window.ROOT_URL}/api/rewards`,
       headers: {
         Authorization: localStorage.getItem('token')
       }
@@ -63,7 +61,7 @@ export function fetchReward(id) {
   return dispatch => {
     axios({
       method: 'get',
-      url: `${ROOT_URL}/api/rewards/${id}`,
+      url: `${window.ROOT_URL}/api/rewards/${id}`,
       headers: {
         Authorization: localStorage.getItem('token')
       }

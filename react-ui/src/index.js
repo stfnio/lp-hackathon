@@ -27,6 +27,12 @@ const store = createStore(
   applyMiddleware(reduxThunk)
 );
 
+if (process.env.NODE_ENV === 'development') {
+  window.ROOT_URL = 'http://localhost:5000';
+} else if (process.env.NODE_ENV === 'production') {
+  window.ROOT_URL = 'https://loyalty-plant.herokuapp';
+}
+
 const token = localStorage.getItem('token');
 // update application state with token information if needed
 if (token) {

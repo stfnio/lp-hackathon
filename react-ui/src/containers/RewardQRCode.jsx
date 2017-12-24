@@ -26,7 +26,7 @@ class RewardQRCode extends Component {
       reward: reward._id
     });
 
-    const imageUrl = `http://localhost:5000/images/${reward.picture}`;
+    const imageUrl = `${window.ROOT_URL}/images/${reward.picture}`;
 
     return (
       <div>

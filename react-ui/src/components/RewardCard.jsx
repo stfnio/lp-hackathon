@@ -4,7 +4,7 @@ import '../styles/RewardCard.css';
 import ShowPoints from '../components/ShowPoints';
 
 export default ({ reward }) => {
-  const imageUrl = `http://localhost:5000/images/${reward.picture}`;
+  const imageUrl = `${window.ROOT_URL}/images/${reward.picture}`;
 
   return (
     <Link to={`rewards/${reward._id}`} className="reward-card">
