@@ -6,8 +6,8 @@ const UserModel = require('../models/user');
 router.get('/', (req, res) => {
   UserModel.find()
     .populate('group')
-    .then(user => {
-      res.status(200).json(user);
+    .then(users => {
+      res.status(200).json(users);
     })
     .catch(err => {
       throw err;
