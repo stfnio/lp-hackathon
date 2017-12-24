@@ -23,6 +23,12 @@ export function logInUser({ tokenId }, redirectToHomePage) {
   };
 }
 
+export function logOutUser() {
+  return {
+    type: LOG_OUT_USER
+  }
+}
+
 export function fetchRewards() {
   return dispatch => {
     axios({

@@ -1,0 +1,11 @@
+.user-info {
+  width: 100%;
+  padding: 0 16px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.user-picture {
+    margin-right: 6px;
+}

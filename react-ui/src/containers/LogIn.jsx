@@ -22,8 +22,8 @@ class LogIn extends Component {
 
   render() {
     return (
-      <div className="vertical-center">
-
+      <div className="container">
+        <div className="vertical-center">
           <h1 className="main-greeting">С новым годом!</h1>
           <div className="login-button-wrapper">
             <GoogleIcon
@@ -41,7 +41,7 @@ class LogIn extends Component {
               // onFailure={onGoogleLoginSuccessFailure}
             />
           </div>
-
+        </div>
       </div>
     );
   }

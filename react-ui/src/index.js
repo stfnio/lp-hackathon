@@ -38,17 +38,19 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider>
       <Router>
-        <App>
-          <Switch>
-            <Route path="/login" component={LogIn} />
-            <PrivateRoute
-              path="/rewards/:id/qr-code"
-              component={RewardQRCode}
-            />
-            <PrivateRoute path="/rewards/:id" component={RewardShow} />
-            <PrivateRoute path="/" component={Home} />
-          </Switch>
-        </App>
+        <Switch>
+          <Route path="/login" component={LogIn} />
+          <App>
+            <Switch>
+              <PrivateRoute
+                path="/rewards/:id/qr-code"
+                component={RewardQRCode}
+              />
+              <PrivateRoute path="/rewards/:id" component={RewardShow} />
+              <PrivateRoute path="/" component={Home} />
+            </Switch>
+          </App>
+        </Switch>
       </Router>
     </MuiThemeProvider>
   </Provider>,
