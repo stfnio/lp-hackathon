@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { LOG_IN_USER, FETCH_REWARDS, FETCH_REWARD } from './types';
+import {
+  LOG_IN_USER,
+  LOG_OUT_USER,
+  FETCH_REWARDS,
+  FETCH_REWARD
+} from './types';
 
 const ROOT_URL = 'http://localhost:5000';
 
@@ -23,10 +28,12 @@ export function logInUser({ tokenId }, redirectToHomePage) {
   };
 }
 
-export function logOutUser() {
+export function logOutUser(redirectToLoginPage) {
+  localStorage.removeItem('token');
+
   return {
     type: LOG_OUT_USER
-  }
+  };
 }
 
 export function fetchRewards() {

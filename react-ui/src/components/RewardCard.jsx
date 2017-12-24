@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/RewardCard.css';
-import FontIcon from 'material-ui/FontIcon';
 import ShowPoints from '../components/ShowPoints';
 
 export default ({ reward }) => {

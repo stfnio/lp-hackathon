@@ -7,6 +7,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { withRouter } from 'react-router-dom';
 import UserInfo from '../components/UserInfo';
+import Divider from 'material-ui/Divider';
+import Exit from 'material-ui/svg-icons/action/exit-to-app';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,9 +46,8 @@ class App extends Component {
           onRequestChange={isMenuOpen => this.setState({ isMenuOpen })}
         >
           <UserInfo user={this.props.user} />
-
-          <MenuItem>Menu Item</MenuItem>
-          <MenuItem>Menu Item 2</MenuItem>
+          <Divider />
+          <MenuItem primaryText="Выйти" leftIcon={<Exit />} />
         </Drawer>
 
         <div className="container">{this.props.children}</div>
