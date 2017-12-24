@@ -5,13 +5,7 @@ const UserModel = require('../models/user');
 const RewardModel = require('../models/reward');
 
 router.post('/', (req, res) => {
-  TransactionModel.find()
-    .then(transaction => {
-      res.sendStatus(200);
-    })
-    .catch(err => {
-      throw err;
-    });
+  
 });
 
 router.post('/fromValidator', (req, res) => {
@@ -20,7 +14,6 @@ router.post('/fromValidator', (req, res) => {
     RewardModel.findOne({ _id: req.body.reward })
   ])
     .then(([user, reward]) => {
-      console.log(reward.price);
       if (user.balance >= reward.price) {
         const tr = new TransactionModel({
           user: req.body.user,
@@ -35,7 +28,7 @@ router.post('/fromValidator', (req, res) => {
         user.save(err => {
           if (err) throw err;
         });
-        res.status(200).json({ message: 'Выдайте подарок ' + reward.title });
+        res.status(201).json({ message: 'Выдайте подарок ' + reward.title });
       } else {
         res.status(400).json({ error: 1 });
       }
