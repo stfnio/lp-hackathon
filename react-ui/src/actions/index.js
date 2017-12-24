@@ -8,7 +8,7 @@ import {
   SET_USER
 } from './types';
 
-const ROOT_URL = 'http://localhost:5000';
+const ROOT_URL = '';
 
 export function logInUser({ tokenId }, redirectToHomePage) {
   return dispatch => {
