@@ -11,6 +11,7 @@ const transactionsRoute = require('./routes/transactionsRoute');
 const groupsRoute = require('./routes/groupsRoute');
 const usersRoute = require('./routes/usersRoute');
 const readyRoute = require('./routes/readyRoute');
+const gameRoute = require('./routes/gameRoute');
 const authRequired = require('./middleware/authRequired');
 const adminRequired = require('./middleware/adminRequired');
 const managerRequired = require('./middleware/managerRequired');
@@ -40,13 +41,14 @@ app.use('/auth', authRoute);
 app.use('/api/', authRequired, bodyParser.json(), morgan('tiny'));
 app.use('/api/ready', readyRoute);
 app.use('/api/rewards', rewardsRoute);
+app.use('/api/game', gameRoute);
 app.use('/api/transactions', managerRequired, transactionsRoute);
-app.use('/api/groups', managerRequired, groupsRoute);
+app.use('/api/groups', adminRequired, groupsRoute);
 app.use('/api/users', adminRequired, usersRoute);
 
 app.get('/images/:id', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'images/', req.params.id))
-})
+  res.sendFile(path.resolve(__dirname, 'images/', req.params.id));
+});
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (req, res) => {

@@ -24,8 +24,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const group = new GroupModel({
-    name: req.body.name,
-    users: []
+    name: req.body.name
   });
   group.save().catch(err => {
     throw err;
