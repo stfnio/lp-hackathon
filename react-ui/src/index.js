@@ -30,7 +30,7 @@ const store = createStore(
 if (process.env.NODE_ENV === 'development') {
   window.ROOT_URL = 'http://localhost:5000';
 } else if (process.env.NODE_ENV === 'production') {
-  window.ROOT_URL = 'https://loyalty-plant.herokuapp';
+  window.ROOT_URL = '';
 }
 
 const token = localStorage.getItem('token');
