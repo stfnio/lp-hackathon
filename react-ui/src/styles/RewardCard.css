@@ -10,7 +10,7 @@
   margin-bottom: 16px;
 }
 
-.reward-image {
+.reward-card-image {
   position: relative;
   display: block;
   background-repeat: no-repeat;
@@ -19,7 +19,7 @@
   height: 110px;
 }
 
-.reward-price {
+.reward-card-price {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -33,7 +33,7 @@
   padding: 9px;
 }
 
-.reward-title {
+.reward-card-title {
   font-size: 14px;
   font-weight: 500;
 }

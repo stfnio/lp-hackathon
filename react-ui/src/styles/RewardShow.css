@@ -1,0 +1,46 @@
+.reward-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.reward-details {
+  position: absolute;
+  bottom: 120px;
+  left: 0;
+  width: 100%;
+  min-height: 130px;
+  padding: 18px;
+  background-color: #262a33;
+}
+
+.reward-title {
+  font-size: 27px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.reward-description {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.reward-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    color: white;
+    background-color: #E7A415;
+    border-radius: 3px;
+    height: 52px;
+}

@@ -3,7 +3,7 @@ import FontIcon from 'material-ui/FontIcon';
 
 export default ({ points, size }) => {
   return (
-    <div>
+    <div style={{ color: '#fff' }}>
       {points}
       <FontIcon
         className="material-icons"

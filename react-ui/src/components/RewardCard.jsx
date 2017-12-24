@@ -9,15 +9,15 @@ export default ({ reward }) => {
   return (
     <Link to={`rewards/${reward._id}`} className="reward-card">
       <div
-        className="reward-image"
+        className="reward-card-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
-        <div className="reward-price">
+        <div className="reward-card-price">
           <ShowPoints points={reward.price} />
         </div>
       </div>
       <div className="reward-caption">
-        <div className="reward-title">{reward.title}</div>
+        <div className="reward-card-title">{reward.title}</div>
       </div>
     </Link>
   );
