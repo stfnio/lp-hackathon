@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const config = require('./config');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const UserModel = require('./models/user');
@@ -18,9 +17,7 @@ const managerRequired = require('./middleware/managerRequired');
 const app = express();
 
 const mongoose = require('mongoose');
-const mongoDB =
-  'mongodb://heroku_ls71pk2d:mru8v2efleiq8e8auncsblsbdi@ds159776.mlab.com:59776/heroku_ls71pk2d';
-mongoose.connect(mongoDB, {
+mongoose.connect(process.env.MONGODB_URI, {
   useMongoClient: true
 });
 mongoose.Promise = global.Promise;
