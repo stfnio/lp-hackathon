@@ -10,6 +10,7 @@ const rewardsRoute = require('./routes/rewardsRoute');
 const transactionsRoute = require('./routes/transactionsRoute');
 const groupsRoute = require('./routes/groupsRoute');
 const usersRoute = require('./routes/usersRoute');
+const readyRoute = require('./routes/readyRoute');
 const authRequired = require('./middleware/authRequired');
 const adminRequired = require('./middleware/adminRequired');
 const managerRequired = require('./middleware/managerRequired');
@@ -37,6 +38,7 @@ app.use(
 app.use('/auth', authRoute);
 
 app.use('/api/', authRequired, bodyParser.json(), morgan('tiny'));
+app.use('/api/ready', readyRoute);
 app.use('/api/rewards', rewardsRoute);
 app.use('/api/transactions', managerRequired, transactionsRoute);
 app.use('/api/groups', managerRequired, groupsRoute);

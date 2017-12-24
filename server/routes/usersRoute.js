@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 router.put('/:id', adminRequired, (req, res) => {
   UserModel.update({ _id: req.params.id }, { role: 'Manager' }, err => {
-    throw err;
+    if (err) throw err;
   });
   res.sendStatus(200);
 });

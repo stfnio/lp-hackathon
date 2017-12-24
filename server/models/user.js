@@ -15,7 +15,8 @@ const UserSchema = new Schema({
   },
   balance: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   group: {
     type: Schema.ObjectId,
@@ -26,6 +27,11 @@ const UserSchema = new Schema({
     required: true,
     enum: ['User', 'Manager', 'Admin'],
     default: 'User'
+  },
+  isReady: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 
