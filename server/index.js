@@ -38,6 +38,10 @@ app.use('/api/rewards', rewardsRoute);
 app.use('/api/transactions', transactionsRoute);
 app.use('/api/users', usersRoute);
 
+app.get('/images/:id', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'images/', req.params.id))
+})
+
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
