@@ -40,6 +40,7 @@ function handleAuth(token, res) {
         .json({ token: jwt.encode(user, process.env.GOOGLE_API_SECRET) });
     } else {
       const user = new UserModel({
+        email: payload.email,
         name: payload.name,
         picture: payload.picture
       });
