@@ -21,7 +21,7 @@ class RewardShow extends Component {
       return <div>Loading...</div>;
     }
 
-    const imageUrl = `http://localhost:5000/images/${reward.picture}`;
+    const imageUrl = `${window.ROOT_URL}/images/${reward.picture}`;
 
     return (
       <div>
