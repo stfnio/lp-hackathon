@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchReward } from '../actions/index';
-var QRCode = require('qrcode.react');
+import QRCode from 'qrcode.react';
+import '../styles/RewardShow.css';
 
 class RewardQRCode extends Component {
   componentDidMount() {
