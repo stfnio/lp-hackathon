@@ -124,7 +124,7 @@ class App extends Component {
             onClick={() => this.redirectToRewards()}
           />
           <BottomNavigationItem
-            label="Команда"
+            label="Отсек"
             icon={team}
             onClick={() => this.redirectToTeam()}
           />

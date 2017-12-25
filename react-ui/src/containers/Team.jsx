@@ -43,7 +43,7 @@ class Team extends Component {
 
     return (
       <div>
-        <h2 style={{ color: '#fff' }}>Команда</h2>
+        <h2 style={{ color: '#fff' }}>Отсек</h2>
         {!user.isReady ? (
           <Button title="Я готов!" onClick={() => this.handleButtonClick()} />
         ) : !game.isStarted ? (
