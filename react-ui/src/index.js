@@ -24,20 +24,18 @@ import reducers from './reducers/index';
 import { LOG_IN_USER } from './actions/types';
 import { fetchUser } from './actions/index';
 
-const socket = io.connect('http://localhost:5000');
-
-socket.on('update', msg => console.log(msg));
-
 const store = createStore(
   reducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(reduxThunk)
 );
-
+let socket;
 if (process.env.NODE_ENV === 'development') {
   window.ROOT_URL = 'http://localhost:5000';
+  socket = io.connect('http://localhost:5000');
 } else if (process.env.NODE_ENV === 'production') {
   window.ROOT_URL = '';
+  socket = io.connect('');
 }
 
 const token = localStorage.getItem('token');
