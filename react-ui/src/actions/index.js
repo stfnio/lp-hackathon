@@ -11,7 +11,8 @@ import {
   SET_ADMIN_PRIVILEGES,
   SET_MANAGER_PRIVILEGES,
   FETCH_TEAMS,
-  FETCH_STATION
+  FETCH_STATIONS,
+  TEAM_COMPLETE_STATION
 } from './types';
 
 export function logInUser({ tokenId }, redirectToHomePage) {
@@ -158,7 +159,7 @@ export function fetchTeams() {
   return dispatch => {
     axios({
       method: 'get',
-      url: `${window.ROOT_URL}/api/teams`,
+      url: `${window.ROOT_URL}/api/groups`,
       headers: {
         Authorization: localStorage.getItem('token')
       }
@@ -171,18 +172,43 @@ export function fetchTeams() {
   };
 }
 
-export function fetchStation(stationId) {
+export function fetchStations() {
   return dispatch => {
     axios({
       method: 'get',
-      url: `${window.ROOT_URL}/api/stations/${stationId}`,
+      url: `${window.ROOT_URL}/api/stations`,
       headers: {
         Authorization: localStorage.getItem('token')
       }
     }).then(({ data }) => {
       dispatch({
-        type: FETCH_STATION,
+        type: FETCH_STATIONS,
         payload: data
+      });
+    });
+  };
+}
+
+export function onTeamCompleteStation(teamId, stationId) {
+  return dispatch => {
+    axios({
+      method: 'post',
+      url: `${window.ROOT_URL}/api/groups/stationCheckIn`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      },
+      data: {
+        team: teamId,
+        station: stationId
+      }
+    }).then(() => {
+      debugger
+      dispatch({
+        type: TEAM_COMPLETE_STATION,
+        payload: {
+          teamId,
+          stationId
+        }
       });
     });
   };
