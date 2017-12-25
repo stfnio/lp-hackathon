@@ -189,7 +189,7 @@ export function fetchStations() {
   };
 }
 
-export function onTeamCompleteStation(teamId, stationId) {
+export function onTeamCompleteStation(teamId, stationId, rewardPoints) {
   return dispatch => {
     axios({
       method: 'post',
@@ -198,11 +198,11 @@ export function onTeamCompleteStation(teamId, stationId) {
         Authorization: localStorage.getItem('token')
       },
       data: {
-        team: teamId,
-        station: stationId
+        group: teamId,
+        station: stationId,
+        rewardPoints
       }
     }).then(() => {
-      debugger
       dispatch({
         type: TEAM_COMPLETE_STATION,
         payload: {

@@ -15,26 +15,52 @@ class Station extends Component {
     this.props.fetchTeams();
   }
 
-  onTeamPassStation = (teamId, stationId) => {
-    this.props.onTeamCompleteStation(teamId, stationId);
+  onTeamPassStation = (teamId, stationId, rewardPoints) => {
+    this.props.onTeamCompleteStation(teamId, stationId, rewardPoints);
   };
 
   renderTeams(station) {
+    const renderButtons = (team, station) => (
+      <div className="station-team-buttons">
+        <div
+          className="station-team-button red"
+          onClick={() => {
+            this.onTeamPassStation(team._id, station._id, 50);
+          }}
+        >
+          50
+        </div>
+        <div
+          className="station-team-button yellow"
+          onClick={() => {
+            this.onTeamPassStation(team._id, station._id, 75);
+          }}
+        >
+          75
+        </div>
+        <div
+          className="station-team-button green"
+          onClick={() => {
+            this.onTeamPassStation(team._id, station._id, 100);
+          }}
+        >
+          100
+        </div>
+      </div>
+    );
+
     return (
       <ul className="station-team-list">
         {_.map(this.props.teams, team => {
           return (
-            <li key={team._id} className="station-team">
-              <div className="station-team-name">{team.name}</div>
-              <div
-                className="station-team-button"
-                onClick={() => {
-                  this.onTeamPassStation(team._id, station._id);
-                }}
-              >
-                Пройдено
-              </div>
-            </li>
+            <div key={team._id}>
+              <li className="station-team">
+                <div className="station-team-name">{team.name}</div>
+              </li>
+              {_.includes(team.completedStations, station._id)
+                ? 'ok'
+                : renderButtons(team, station)}
+            </div>
           );
         })}
       </ul>
