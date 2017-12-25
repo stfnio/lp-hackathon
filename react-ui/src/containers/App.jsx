@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import AppBar from 'material-ui/AppBar';
 import { connect } from 'react-redux';
-import ShowPoints from '../components/ShowPoints';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { withRouter } from 'react-router-dom';
 import UserInfo from '../components/UserInfo';
 import Divider from 'material-ui/Divider';
+import UserPoints from '../containers/UserPoints';
 import Exit from 'material-ui/svg-icons/action/exit-to-app';
 import {
   BottomNavigation,
@@ -79,17 +79,13 @@ class App extends Component {
         onClick={() => this.redirectToStation()}
       />
     );
-    const { auth, user, children } = this.props;
+    const { auth, user, children, socket } = this.props;
 
     return (
       <div className="App">
         <AppBar
           title="Loyalty game"
-          iconElementRight={
-            <div className="user-balance">
-              <ShowPoints points={user.balance} size={25} />
-            </div>
-          }
+          iconElementRight={<UserPoints socket={socket} />}
           onLeftIconButtonClick={this.toggleMenu}
           onTitleClick={this.redirectHome}
           style={{ position: 'absolute' }}

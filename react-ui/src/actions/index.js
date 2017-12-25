@@ -12,7 +12,8 @@ import {
   SET_MANAGER_PRIVILEGES,
   FETCH_TEAMS,
   FETCH_STATIONS,
-  TEAM_COMPLETE_STATION
+  TEAM_COMPLETE_STATION,
+  UPDATE_USER_BALANCE
 } from './types';
 
 export function logInUser({ tokenId }, redirectToHomePage) {
@@ -213,5 +214,16 @@ export function onTeamCompleteStation(teamId, stationId, rewardPoints) {
         }
       });
     });
+  };
+}
+
+export function updateUserBalance(user, balance) {
+  return (dispatch, getState) => {
+    if (getState().user._id === user._id) {
+      return {
+        type: UPDATE_USER_BALANCE,
+        payload: balance
+      };
+    }
   };
 }

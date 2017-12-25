@@ -50,8 +50,6 @@ if (token) {
   store.dispatch({ type: LOG_IN_USER });
 }
 
-// const socket = io('', { path: '/api/socket' });
-
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider>
@@ -63,7 +61,7 @@ ReactDOM.render(
             roles={['admin', 'manager']}
           />
           <Route path="/login" component={LogIn} />
-          <App>
+          <App socket={socket}>
             <Switch>
               <PrivateRoute
                 path="/rewards/:id/qr-code"
