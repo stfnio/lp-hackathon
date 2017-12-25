@@ -10,7 +10,7 @@ export default function(state = {}, action) {
       const stationId = action.payload.stationId;
       const team = state[teamId];
       const completedStations = team.completedStations;
-debugger;
+
       return {
         ...state,
         [teamId]: {

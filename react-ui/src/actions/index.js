@@ -125,13 +125,15 @@ export function fetchGame() {
         }
       });
 
-      dispatch({
-        type: FETCH_TEAM,
-        payload: {
-          name: data.group.name,
-          members: data.group.users
-        }
-      });
+      if (data.group) {
+        dispatch({
+          type: FETCH_TEAM,
+          payload: {
+            name: data.group.name,
+            members: data.group.users
+          }
+        });
+      }
     });
   };
 }
@@ -189,7 +191,7 @@ export function fetchStations() {
   };
 }
 
-export function onTeamCompleteStation(teamId, stationId) {
+export function onTeamCompleteStation(teamId, stationId, rewardPoints) {
   return dispatch => {
     axios({
       method: 'post',
@@ -198,11 +200,11 @@ export function onTeamCompleteStation(teamId, stationId) {
         Authorization: localStorage.getItem('token')
       },
       data: {
-        team: teamId,
-        station: stationId
+        group: teamId,
+        station: stationId,
+        rewardPoints
       }
     }).then(() => {
-      debugger
       dispatch({
         type: TEAM_COMPLETE_STATION,
         payload: {

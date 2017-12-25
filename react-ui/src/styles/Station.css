@@ -6,7 +6,7 @@
   font-size: 22px;
   font-weight: 500;
   color: white;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .station-team-list {
@@ -19,13 +19,11 @@
 }
 
 .station-team {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
 }
 
 .station-team:not(:last-child) {
-  margin-bottom: 12px;
+  margin-bottom: 30px;
 }
 
 .station-team-button {
@@ -33,5 +31,40 @@
   background-color: #e7a415;
   border-radius: 3px;
   cursor: pointer;
-  margin-left: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.station-team-name {
+  font-size: 18px;
+  color: #e7a415;
+  margin-bottom: 9px;
+}
+
+.station-team-button.red {
+  background-color: #e53935;
+}
+
+.station-team-button.yellow {
+  background-color: #e7a415;
+}
+
+.station-team-button.green {
+  background-color: #4caf50;
+}
+
+.station-team-button:not(:last-child) {
+  margin-right: 6px;
+}
+
+.station-team-buttons {
+  display: flex;
+  flex-grow: 1;
+}
+
+.station-team-success {
+  color: #4caf50;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
