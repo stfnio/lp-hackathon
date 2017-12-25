@@ -8,6 +8,7 @@ import reduxThunk from 'redux-thunk';
 import jwt_decode from 'jwt-decode';
 import registerServiceWorker from './registerServiceWorker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import io from 'socket.io-client';
 
 import App from './containers/App';
 import Home from './containers/Home';
@@ -41,6 +42,8 @@ if (token) {
   store.dispatch({ type: LOG_IN_USER });
   store.dispatch({ type: SET_USER, payload: user });
 }
+
+// const socket = io('', { path: '/api/socket' });
 
 ReactDOM.render(
   <Provider store={store}>

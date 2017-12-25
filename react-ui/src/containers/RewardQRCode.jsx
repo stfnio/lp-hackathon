@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchReward } from '../actions/index';
 import QRCode from 'qrcode.react';
 import '../styles/RewardShow.css';
+import Button from '../components/Button';
 
 class RewardQRCode extends Component {
   componentDidMount() {
@@ -39,17 +40,12 @@ class RewardQRCode extends Component {
         <div className="reward-details">
           <div className="reward-qr-code-wrapper">
             <div className="reward-qr-code">
-              <QRCode value={transaction} size={200} />;
+              <QRCode value={transaction} size={150} />;
             </div>
           </div>
           <div className="reward-title">{reward.title}</div>
-          <div className="reward-description">{reward.description}</div>
-          <div
-            className="reward-button"
-            onClick={() => this.transitionToRewards()}
-          >
-            Готово
-          </div>
+
+          <Button title="Готово" onClick={() => this.transitionToRewards()} />
         </div>
       </div>
     );
