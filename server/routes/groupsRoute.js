@@ -31,6 +31,9 @@ router.post('/stationCheckIn', (req, res) => {
       GroupModel.save(group, err => {
         if (err) throw err;
       });
+      //
+
+      req.sendStatus(200);
     })
     .catch(err => {
       throw err;
