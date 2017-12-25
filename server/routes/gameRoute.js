@@ -67,13 +67,14 @@ function prepareGame() {
     groups.forEach(g => {
       GroupModel.update(
         { _id: g._id },
-        { users: g.users.map(u => u._id) },
+        {
+          users: g.users.map(u => u._id)
+        },
         err => {
           if (err) throw err;
         }
       );
     });
-    console.log(groups.map(g => String(g._id)));
     const game = new GameModel({
       isStarted: true,
       groups: groups.map(g => String(g._id))

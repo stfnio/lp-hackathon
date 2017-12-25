@@ -27,21 +27,28 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/stationCheckIn', (req, res) => {
-  Promis.all([
-    GroupModel.findOne({ _id: req.body.group }),
+  Promise.all([
+    GroupModel.findOne({ _id: req.body.group }).populate('users'),
     StationModel.findOne({ _id: req.body.station })
   ])
     .then(([group, station]) => {
-      const amount = Math.floor(station.rewardPoints / group.users.length);
       group.users.forEach(u => {
-        UserModel.update({ _id: u._id }, { balance: u.balance + amount });
+        console.log(u);
+        console.log(station.rewardPoints);
+        UserModel.update(
+          { _id: u._id },
+          { balance: u.balance + station.rewardPoints },
+          err => {
+            if (err) throw err;
+          }
+        );
         // socket emit
       });
       group.completedStations.push(req.body.station);
-      GroupModel.save(group, err => {
+      group.save(err => {
         if (err) throw err;
       });
-      req.sendStatus(200);
+      res.sendStatus(200);
     })
     .catch(err => {
       throw err;
