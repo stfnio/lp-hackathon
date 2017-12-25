@@ -7,8 +7,8 @@ class UserPoints extends Component {
   componentDidMount() {
     const { updateUserBalance, socket } = this.props;
 
-    socket.on('balanceUpdate', ({ userId, balance }) => {
-      updateUserBalance(userId, balance);
+    socket.on('balanceUpdate', ({ user, balance }) => {
+      updateUserBalance(user, balance);
     });
   }
 
