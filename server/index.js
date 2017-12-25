@@ -17,6 +17,10 @@ const authRequired = require('./middleware/authRequired');
 const adminRequired = require('./middleware/adminRequired');
 const managerRequired = require('./middleware/managerRequired');
 const app = express();
+const PORT = process.env.PORT || 5000;
+var io = require('socket.io').listen(
+  app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
+);
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI, {
@@ -26,7 +30,10 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-const PORT = process.env.PORT || 5000;
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
@@ -39,6 +46,13 @@ app.use(
 );
 
 app.use('/auth', authRoute);
+
+io.sockets.on('connection', socket => {
+  console.log('client connect');
+  // socket.on('echo', function(data) {
+  //   io.sockets.emit('message', data);
+  // });
+});
 
 app.use('/api/', authRequired, bodyParser.json(), morgan('tiny'));
 app.use('/api/ready', readyRoute);
@@ -57,5 +71,3 @@ app.get('/images/:id', (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
-
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

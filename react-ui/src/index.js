@@ -24,6 +24,10 @@ import reducers from './reducers/index';
 import { LOG_IN_USER } from './actions/types';
 import { fetchUser } from './actions/index';
 
+const socket = io.connect('http://localhost:5000');
+
+socket.on('update', msg => console.log(msg));
+
 const store = createStore(
   reducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
