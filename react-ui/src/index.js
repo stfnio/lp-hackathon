@@ -41,9 +41,9 @@ const token = localStorage.getItem('token');
 if (token) {
   const user = jwt_decode(token);
 
-  store.dispatch({ type: LOG_IN_USER });
-
   store.dispatch(fetchUser(user._id));
+
+  store.dispatch({ type: LOG_IN_USER });
 }
 
 // const socket = io('', { path: '/api/socket' });

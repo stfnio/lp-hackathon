@@ -5,6 +5,9 @@
   color: white;
   font-size: 18px;
   font-weight: 500;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
 }
 
 .team-title {

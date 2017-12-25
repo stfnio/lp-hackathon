@@ -14,7 +14,7 @@ import {
   BottomNavigationItem
 } from 'material-ui/BottomNavigation';
 import FontIcon from 'material-ui/FontIcon';
-import { logOutUser } from '../actions/index';
+import { logOutUser, setUserReadiness } from '../actions/index';
 
 const rewards = <FontIcon className="material-icons">card_giftcard</FontIcon>;
 const team = <FontIcon className="material-icons">group</FontIcon>;
@@ -60,10 +60,12 @@ class App extends Component {
     this.props.history.push('/team');
   };
 
-  logOutUser = () => {
+  onClickQuit = () => {
     this.props.logOutUser(() => {
       this.props.history.push('/login');
     });
+
+    this.props.setUserReadiness(false);
   };
 
   render() {
@@ -92,7 +94,7 @@ class App extends Component {
           <MenuItem
             primaryText="Выйти"
             leftIcon={<Exit />}
-            onClick={this.logOutUser}
+            onClick={this.onClickQuit}
           />
         </Drawer>
 
@@ -124,4 +126,6 @@ function mapStateToProps({ user }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { logOutUser })(App));
+export default withRouter(
+  connect(mapStateToProps, { logOutUser, setUserReadiness })(App)
+);

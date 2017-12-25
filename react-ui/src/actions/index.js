@@ -46,7 +46,7 @@ export function fetchUser(userId) {
   return dispatch => {
     axios({
       method: 'get',
-      url: `${window.ROOT_URL}/user/${userId}`,
+      url: `${window.ROOT_URL}/api/users/${userId}`,
       headers: {
         Authorization: localStorage.getItem('token')
       }
@@ -140,9 +140,14 @@ export function setUserReadiness(isReady) {
       url: `${window.ROOT_URL}/api/ready`,
       headers: {
         Authorization: localStorage.getItem('token')
+      },
+      data: {
+        isReady
       }
     }).then(() => {
-      fetchUser(getState().user._id);
+      const useId = getState().user._id;
+
+      dispatch(fetchUser(useId));
     });
   };
 }
