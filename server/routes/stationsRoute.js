@@ -25,7 +25,6 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const station = new StationModel({
     name: req.body.name,
-    rewardPoints: req.body.rewardPoints,
     user: req.body.user
   });
   station.save().catch(err => {

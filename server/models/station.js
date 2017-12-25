@@ -9,10 +9,6 @@ const StationSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  },
-  rewardPoints: {
-    type: Number,
-    required: true
   }
 })
 

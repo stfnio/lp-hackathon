@@ -32,11 +32,9 @@ router.post('/stationCheckIn', (req, res) => {
   ])
     .then(([group, station]) => {
       group.users.forEach(u => {
-        console.log(u);
-        console.log(station.rewardPoints);
         UserModel.update(
           { _id: u._id },
-          { balance: u.balance + station.rewardPoints },
+          { balance: u.balance + req.body.rewardPoints },
           err => {
             if (err) throw err;
           }
