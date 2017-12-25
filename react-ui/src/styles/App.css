@@ -1,11 +1,16 @@
 .App {
-  height: calc(100% - 64px);
+  height: calc(100% - 56px);
 }
 .container {
   padding: 24px;
   padding-top: 64px;
-  height: 100%;
+  padding-bottom: 54px;
+  min-height: 100%;
   position: relative;
+  background-image: url(../img/rewards.png), url(../img/balls.png);
+  background-repeat: no-repeat, no-repeat;
+  background-position: bottom, top;
+  background-size: contain, contain;
 }
 
 .App-logo {

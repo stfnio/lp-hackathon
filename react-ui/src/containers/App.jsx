@@ -14,7 +14,7 @@ import {
   BottomNavigationItem
 } from 'material-ui/BottomNavigation';
 import FontIcon from 'material-ui/FontIcon';
-import { logOutUser } from '../actions/index';
+import { logOutUser, setUserReadiness } from '../actions/index';
 
 const rewards = <FontIcon className="material-icons">card_giftcard</FontIcon>;
 const team = <FontIcon className="material-icons">group</FontIcon>;
@@ -27,6 +27,14 @@ class App extends Component {
       isMenuOpen: false,
       selectedAppSectionIndex: null
     };
+  }
+
+  componentDidMount() {
+    if (this.props.location.pathname === '/rewards') {
+      this.setState({ selectedAppSectionIndex: 0 });
+    } else if (this.props.location.pathname === '/team') {
+      this.setState({ selectedAppSectionIndex: 1 });
+    }
   }
 
   toggleMenu = () =>
@@ -52,20 +60,34 @@ class App extends Component {
     this.props.history.push('/team');
   };
 
-  logOutUser = () => {
+  redirectToStation = () => {
+    this.props.history.push('/station');
+  };
+
+  onClickQuit = () => {
     this.props.logOutUser(() => {
       this.props.history.push('/login');
     });
+
+    this.props.setUserReadiness(false);
   };
 
   render() {
+    const teamBalanceItem = (
+      <MenuItem
+        primaryText="Станция"
+        onClick={() => this.redirectToStation()}
+      />
+    );
+    const { auth, user, children } = this.props;
+
     return (
       <div className="App">
         <AppBar
           title="Loyalty game"
           iconElementRight={
             <div className="user-balance">
-              <ShowPoints points={this.props.user.balance} size={25} />
+              <ShowPoints points={user.balance} size={25} />
             </div>
           }
           onLeftIconButtonClick={this.toggleMenu}
@@ -79,16 +101,22 @@ class App extends Component {
           open={this.state.isMenuOpen}
           onRequestChange={isMenuOpen => this.setState({ isMenuOpen })}
         >
-          <UserInfo user={this.props.user} />
+          <UserInfo user={user} />
+
+          {(auth.isAdmin || auth.isManager) && <Divider />}
+
+          {auth.isManager && teamBalanceItem}
+
           <Divider />
+
           <MenuItem
             primaryText="Выйти"
             leftIcon={<Exit />}
-            onClick={this.logOutUser}
+            onClick={this.onClickQuit}
           />
         </Drawer>
 
-        <div className="container">{this.props.children}</div>
+        <div className="container">{children}</div>
 
         <BottomNavigation
           style={{ position: 'fixed', bottom: 0 }}
@@ -110,10 +138,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ user }) {
+function mapStateToProps({ user, auth }) {
   return {
-    user
+    user,
+    auth
   };
 }
 
-export default withRouter(connect(mapStateToProps, { logOutUser })(App));
+export default withRouter(
+  connect(mapStateToProps, { logOutUser, setUserReadiness })(App)
+);

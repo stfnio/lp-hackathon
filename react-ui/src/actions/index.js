@@ -8,7 +8,10 @@ import {
   SET_USER,
   FETCH_GAME,
   FETCH_TEAM,
-  SET_USER_READINESS
+  SET_ADMIN_PRIVILEGES,
+  SET_MANAGER_PRIVILEGES,
+  FETCH_TEAMS,
+  FETCH_STATION
 } from './types';
 
 export function logInUser({ tokenId }, redirectToHomePage) {
@@ -30,7 +33,35 @@ export function logInUser({ tokenId }, redirectToHomePage) {
 
       dispatch({ type: SET_USER, payload: user });
 
+      if (user.role === 'Admin') {
+        dispatch({ type: SET_ADMIN_PRIVILEGES });
+      } else if (user.role === 'Manager') {
+        dispatch({ type: SET_MANAGER_PRIVILEGES });
+      }
+
       redirectToHomePage();
+    });
+  };
+}
+
+export function fetchUser(userId) {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${window.ROOT_URL}/api/users/${userId}`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(({ data }) => {
+      const user = data;
+
+      dispatch({ type: SET_USER, payload: user });
+
+      if (user.role === 'Admin') {
+        dispatch({ type: SET_ADMIN_PRIVILEGES });
+      } else if (user.role === 'Manager') {
+        dispatch({ type: SET_MANAGER_PRIVILEGES });
+      }
     });
   };
 }
@@ -86,7 +117,6 @@ export function fetchGame() {
         Authorization: localStorage.getItem('token')
       }
     }).then(({ data }) => {
-
       dispatch({
         type: FETCH_GAME,
         payload: {
@@ -106,17 +136,53 @@ export function fetchGame() {
 }
 
 export function setUserReadiness(isReady) {
-  return dispatch => {
+  return (dispatch, getState) => {
     axios({
       method: 'post',
       url: `${window.ROOT_URL}/api/ready`,
       headers: {
         Authorization: localStorage.getItem('token')
+      },
+      data: {
+        isReady
       }
     }).then(() => {
+      const useId = getState().user._id;
+
+      dispatch(fetchUser(useId));
+    });
+  };
+}
+
+export function fetchTeams() {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${window.ROOT_URL}/api/teams`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(({ data }) => {
       dispatch({
-        type: SET_USER_READINESS,
-        payload: isReady
+        type: FETCH_TEAMS,
+        payload: data
+      });
+    });
+  };
+}
+
+export function fetchStation(stationId) {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${window.ROOT_URL}/api/stations/${stationId}`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(({ data }) => {
+      dispatch({
+        type: FETCH_STATION,
+        payload: data
       });
     });
   };

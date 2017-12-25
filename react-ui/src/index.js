@@ -11,16 +11,18 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import io from 'socket.io-client';
 
 import App from './containers/App';
-import Home from './containers/Home';
 import LogIn from './containers/LogIn';
 import Team from './containers/Team';
+import Station from './containers/Station';
 import RewardList from './containers/RewardList';
 import RewardShow from './containers/RewardShow';
 import RewardQRCode from './containers/RewardQRCode';
 import PrivateRoute from './containers/PrivateRoute';
+import Home from './components/Home';
 
 import reducers from './reducers/index';
-import { LOG_IN_USER, SET_USER } from './actions/types';
+import { LOG_IN_USER } from './actions/types';
+import { fetchUser } from './actions/index';
 
 const store = createStore(
   reducers,
@@ -39,8 +41,9 @@ const token = localStorage.getItem('token');
 if (token) {
   const user = jwt_decode(token);
 
+  store.dispatch(fetchUser(user._id));
+
   store.dispatch({ type: LOG_IN_USER });
-  store.dispatch({ type: SET_USER, payload: user });
 }
 
 // const socket = io('', { path: '/api/socket' });
@@ -50,6 +53,11 @@ ReactDOM.render(
     <MuiThemeProvider>
       <Router>
         <Switch>
+          <PrivateRoute
+            path="/station"
+            component={Station}
+            roles={['admin', 'manager']}
+          />
           <Route path="/login" component={LogIn} />
           <App>
             <Switch>

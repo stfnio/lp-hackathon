@@ -19,7 +19,7 @@ class Team extends Component {
               <Avatar
                 className="team-member-picture"
                 src={member.picture}
-                size={80}
+                size={60}
               />
               <div className="team-member-name">{member.name}</div>
             </li>
@@ -29,7 +29,7 @@ class Team extends Component {
     );
   }
 
-  setUserReadiness = () => {
+  handleButtonClick = () => {
     this.props.setUserReadiness(true);
   };
 
@@ -40,7 +40,7 @@ class Team extends Component {
       <div>
         <h2 style={{ color: '#fff' }}>Команда</h2>
         {!user.isReady ? (
-          <Button title="Я готов!" onClick={() => this.setUserReadiness()} />
+          <Button title="Я готов!" onClick={() => this.handleButtonClick()} />
         ) : !game.isStarted ? (
           <div className="game-waiting">Ожидайте начала игры...</div>
         ) : (
@@ -62,4 +62,7 @@ function mapStateToProps({ game, user, team }) {
   };
 }
 
-export default connect(mapStateToProps, { fetchGame, setUserReadiness })(Team);
+export default connect(mapStateToProps, {
+  fetchGame,
+  setUserReadiness
+})(Team);
