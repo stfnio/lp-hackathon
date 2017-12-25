@@ -8,7 +8,9 @@ import {
   SET_USER,
   FETCH_GAME,
   FETCH_TEAM,
-  SET_USER_READINESS
+  SET_USER_READINESS,
+  SET_ADMIN_PRIVILEGES,
+  SET_MANAGER_PRIVILEGES
 } from './types';
 
 export function logInUser({ tokenId }, redirectToHomePage) {
@@ -29,6 +31,12 @@ export function logInUser({ tokenId }, redirectToHomePage) {
       const user = jwt_decode(res.data.token);
 
       dispatch({ type: SET_USER, payload: user });
+
+      if (user.role === 'Admin') {
+        dispatch({ type: SET_ADMIN_PRIVILEGES });
+      } else if (user.role === 'Manager') {
+        dispatch({ type: SET_MANAGER_PRIVILEGES });
+      }
 
       redirectToHomePage();
     });
@@ -86,7 +94,6 @@ export function fetchGame() {
         Authorization: localStorage.getItem('token')
       }
     }).then(({ data }) => {
-
       dispatch({
         type: FETCH_GAME,
         payload: {

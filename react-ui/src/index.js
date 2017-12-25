@@ -14,13 +14,19 @@ import App from './containers/App';
 import Home from './containers/Home';
 import LogIn from './containers/LogIn';
 import Team from './containers/Team';
+import TeamsBalance from './containers/TeamsBalance';
 import RewardList from './containers/RewardList';
 import RewardShow from './containers/RewardShow';
 import RewardQRCode from './containers/RewardQRCode';
 import PrivateRoute from './containers/PrivateRoute';
 
 import reducers from './reducers/index';
-import { LOG_IN_USER, SET_USER } from './actions/types';
+import {
+  LOG_IN_USER,
+  SET_USER,
+  SET_ADMIN_PRIVILEGES,
+  SET_MANAGER_PRIVILEGES
+} from './actions/types';
 
 const store = createStore(
   reducers,
@@ -41,6 +47,12 @@ if (token) {
 
   store.dispatch({ type: LOG_IN_USER });
   store.dispatch({ type: SET_USER, payload: user });
+
+  if (user.role === 'Admin') {
+    store.dispatch({ type: SET_ADMIN_PRIVILEGES });
+  } else if (user.role === 'Manager') {
+    store.dispatch({ type: SET_MANAGER_PRIVILEGES });
+  }
 }
 
 // const socket = io('', { path: '/api/socket' });
@@ -50,6 +62,11 @@ ReactDOM.render(
     <MuiThemeProvider>
       <Router>
         <Switch>
+          <PrivateRoute
+            path="/teams-balance"
+            component={TeamsBalance}
+            roles={['admin', 'manager']}
+          />
           <Route path="/login" component={LogIn} />
           <App>
             <Switch>
