@@ -69,7 +69,7 @@ ReactDOM.render(
               />
               <PrivateRoute path="/rewards/:id" component={RewardShow} />
               <PrivateRoute path="/rewards/" component={RewardList} />
-              <PrivateRoute path="/team/" component={Team} />
+              <PrivateRoute path="/team/" component={Team} socket={socket} />
               <PrivateRoute path="/" component={Home} />
             </Switch>
           </App>

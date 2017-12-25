@@ -7,7 +7,12 @@ import Button from '../components/Button';
 
 class Team extends Component {
   componentDidMount() {
-    this.props.fetchGame();
+    const { socket, fetchGame } = this.props;
+    fetchGame();
+
+    socket.on('gameStarted', () => {
+      fetchGame();
+    });
   }
 
   renderTeam() {

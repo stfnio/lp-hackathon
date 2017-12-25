@@ -6,7 +6,6 @@ import {
   onTeamCompleteStation
 } from '../actions/index';
 import _ from 'lodash';
-import Button from '../components/Button';
 import '../styles/Station.css';
 
 class Station extends Component {
@@ -71,7 +70,7 @@ class Station extends Component {
   }
 
   render() {
-    const { stations, user, teams } = this.props;
+    const { stations, user } = this.props;
     const station = _.find(stations, { user: user._id });
 
     return (
