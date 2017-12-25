@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class TeamsBalance extends Component {
-  
+  componentDidMount() {
+
+  }
 
   render() {
     return <div>dsfsdf</div>;
   }
 }
 
-function mapStateToProps({ team }) {
+function mapStateToProps({ user, team }) {
   return {
+    user,
     team
   };
 }

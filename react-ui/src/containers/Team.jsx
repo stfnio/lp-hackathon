@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchGame, setUserReadiness } from '../actions/index';
+import { fetchGame, fetchUser, setUserReadiness } from '../actions/index';
 import Avatar from 'material-ui/Avatar';
 import '../styles/Team.css';
 import Button from '../components/Button';
@@ -62,4 +62,8 @@ function mapStateToProps({ game, user, team }) {
   };
 }
 
-export default connect(mapStateToProps, { fetchGame, setUserReadiness })(Team);
+export default connect(mapStateToProps, {
+  fetchGame,
+  fetchUser,
+  setUserReadiness
+})(Team);

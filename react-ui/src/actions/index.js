@@ -43,6 +43,28 @@ export function logInUser({ tokenId }, redirectToHomePage) {
   };
 }
 
+export function fetchUser(userId) {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${window.ROOT_URL}/user/${userId}`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(({ data }) => {
+      const user = data;
+
+      dispatch({ type: SET_USER, payload: user });
+
+      if (user.role === 'Admin') {
+        dispatch({ type: SET_ADMIN_PRIVILEGES });
+      } else if (user.role === 'Manager') {
+        dispatch({ type: SET_MANAGER_PRIVILEGES });
+      }
+    });
+  };
+}
+
 export function logOutUser(redirectToLoginPage) {
   localStorage.removeItem('token');
 
@@ -113,7 +135,7 @@ export function fetchGame() {
 }
 
 export function setUserReadiness(isReady) {
-  return dispatch => {
+  return (dispatch, getState) => {
     axios({
       method: 'post',
       url: `${window.ROOT_URL}/api/ready`,
@@ -121,10 +143,7 @@ export function setUserReadiness(isReady) {
         Authorization: localStorage.getItem('token')
       }
     }).then(() => {
-      dispatch({
-        type: SET_USER_READINESS,
-        payload: isReady
-      });
+      fetchUser(getState().user._id);
     });
   };
 }

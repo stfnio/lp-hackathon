@@ -29,6 +29,14 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.location.pathname === '/rewards') {
+      this.setState({ selectedAppSectionIndex: 0 });
+    } else if (this.props.location.pathname === '/team') {
+      this.setState({ selectedAppSectionIndex: 1 });
+    }
+  }
+
   toggleMenu = () =>
     this.setState({
       isMenuOpen: !this.state.isMenuOpen

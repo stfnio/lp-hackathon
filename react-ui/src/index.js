@@ -27,6 +27,7 @@ import {
   SET_ADMIN_PRIVILEGES,
   SET_MANAGER_PRIVILEGES
 } from './actions/types';
+import { fetchUser } from './actions/index';
 
 const store = createStore(
   reducers,
@@ -46,13 +47,8 @@ if (token) {
   const user = jwt_decode(token);
 
   store.dispatch({ type: LOG_IN_USER });
-  store.dispatch({ type: SET_USER, payload: user });
 
-  if (user.role === 'Admin') {
-    store.dispatch({ type: SET_ADMIN_PRIVILEGES });
-  } else if (user.role === 'Manager') {
-    store.dispatch({ type: SET_MANAGER_PRIVILEGES });
-  }
+  store.dispatch(fetchUser(user._id));
 }
 
 // const socket = io('', { path: '/api/socket' });
