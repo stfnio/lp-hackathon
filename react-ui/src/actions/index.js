@@ -119,12 +119,14 @@ export function fetchGame() {
         Authorization: localStorage.getItem('token')
       }
     }).then(({ data }) => {
-      dispatch({
-        type: FETCH_GAME,
-        payload: {
-          isStarted: data.game.isStarted
-        }
-      });
+      if (data.game) {
+        dispatch({
+          type: FETCH_GAME,
+          payload: {
+            isStarted: data.game.isStarted
+          }
+        });
+      }
 
       if (data.group) {
         dispatch({
