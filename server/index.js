@@ -45,7 +45,7 @@ app.use('/api/rewards', rewardsRoute);
 app.use('/api/game', gameRoute);
 app.use('/api/transactions', managerRequired, transactionsRoute);
 app.use('/api/groups', adminRequired, groupsRoute);
-app.use('/api/users', adminRequired, usersRoute);
+app.use('/api/users', usersRoute);
 
 app.get('/images/:id', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'images/', req.params.id));
