@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 class PrivateRoute extends Component {
   render() {
-    const { auth, roles, component: Component, ...rest } = this.props;
+    const { auth, roles, socket, component: Component, ...rest } = this.props;
 
     if (_.includes(roles, 'manager')) {
       return (
@@ -13,7 +13,7 @@ class PrivateRoute extends Component {
           {...rest}
           render={props =>
             auth.authenticated && (auth.isManager || auth.isAdmin) ? (
-              <Component {...props} />
+              <Component {...props} socket={socket} />
             ) : (
               <Redirect
                 to={{
@@ -31,7 +31,7 @@ class PrivateRoute extends Component {
           {...rest}
           render={props =>
             auth.authenticated && auth.isAdmin ? (
-              <Component {...props} />
+              <Component {...props} socket={socket} />
             ) : (
               <Redirect
                 to={{
@@ -49,7 +49,7 @@ class PrivateRoute extends Component {
           {...rest}
           render={props =>
             auth.authenticated ? (
-              <Component {...props} />
+              <Component {...props} socket={socket} />
             ) : (
               <Redirect
                 to={{
