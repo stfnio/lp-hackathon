@@ -1,0 +1,14 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+  color: white;
+  background-color: #e7a415;
+  border-radius: 3px;
+  height: 52px;
+  cursor: pointer;
+}

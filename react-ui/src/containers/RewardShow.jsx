@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchReward } from '../actions/index';
 import '../styles/RewardShow.css';
 import ShowPoints from '../components/ShowPoints';
+import Button from '../components/Button';
 
 class RewardShow extends Component {
   componentDidMount() {
@@ -38,9 +39,7 @@ class RewardShow extends Component {
             <ShowPoints points={reward.price} />
           </div>
 
-          <div className="reward-button" onClick={() => this.showQRCode()}>
-            Получить подарок
-          </div>
+          <Button title="Получить подарок" onClick={() => this.showQRCode()} />
         </div>
       </div>
     );

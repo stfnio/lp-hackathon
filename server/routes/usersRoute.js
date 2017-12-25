@@ -4,7 +4,7 @@ const adminRequired = require('../middleware/adminRequired');
 const UserModel = require('../models/user');
 
 router.get('/:id', (req, res) => {
-  UserModel.find()
+  UserModel.findOne({ _id: req.params.id })
     .populate('group')
     .then(user => {
       res.status(200).json(user);

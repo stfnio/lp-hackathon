@@ -25,7 +25,7 @@ class App extends Component {
 
     this.state = {
       isMenuOpen: false,
-      selectedAppSectionIndex: 0
+      selectedAppSectionIndex: null
     };
   }
 
@@ -34,15 +34,19 @@ class App extends Component {
       isMenuOpen: !this.state.isMenuOpen
     });
 
-  redirectHome = () => this.props.history.push('/home');
+  redirectHome = () => {
+    this.setState({ selectedAppSectionIndex: null });
 
-  selectRewardSection = () => {
+    this.props.history.push('/home');
+  };
+
+  redirectToRewards = () => {
     this.setState({ selectedAppSectionIndex: 0 });
 
     this.props.history.push('/rewards');
   };
 
-  selectTeamSection = () => {
+  redirectToTeam = () => {
     this.setState({ selectedAppSectionIndex: 1 });
 
     this.props.history.push('/team');
@@ -93,12 +97,12 @@ class App extends Component {
           <BottomNavigationItem
             label="Награды"
             icon={rewards}
-            onClick={() => this.selectRewardSection()}
+            onClick={() => this.redirectToRewards()}
           />
           <BottomNavigationItem
             label="Команда"
             icon={team}
-            onClick={() => this.selectTeamSection()}
+            onClick={() => this.redirectToTeam()}
           />
         </BottomNavigation>
       </div>

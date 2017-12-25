@@ -2,7 +2,7 @@ const UserModel = require('../models/user');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
   UserModel.update(
     { _id: res.locals.user._id },
     { isReady: !res.locals.user.isReady },

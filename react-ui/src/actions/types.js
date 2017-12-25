@@ -4,3 +4,6 @@ export const LOG_OUT_USER = 'LOG_OUT_USER';
 export const FETCH_REWARDS = 'FETCH_REWARDS';
 export const FETCH_REWARD = 'FETCH_REWARD';
 export const SET_USER = 'SET_USER';
+export const FETCH_GAME = 'FETCH_GAME';
+export const FETCH_TEAM = 'FETCH_TEAM';
+export const SET_USER_READINESS = 'SET_USER_READINESS';

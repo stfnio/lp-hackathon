@@ -5,7 +5,10 @@ import {
   LOG_OUT_USER,
   FETCH_REWARDS,
   FETCH_REWARD,
-  SET_USER
+  SET_USER,
+  FETCH_GAME,
+  FETCH_TEAM,
+  SET_USER_READINESS
 } from './types';
 
 export function logInUser({ tokenId }, redirectToHomePage) {
@@ -69,6 +72,51 @@ export function fetchReward(id) {
       dispatch({
         type: FETCH_REWARD,
         payload: res.data
+      });
+    });
+  };
+}
+
+export function fetchGame() {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${window.ROOT_URL}/api/game`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(({ data }) => {
+
+      dispatch({
+        type: FETCH_GAME,
+        payload: {
+          isStarted: data.game.isStarted
+        }
+      });
+
+      dispatch({
+        type: FETCH_TEAM,
+        payload: {
+          name: data.group.name,
+          members: data.group.users
+        }
+      });
+    });
+  };
+}
+
+export function setUserReadiness(isReady) {
+  return dispatch => {
+    axios({
+      method: 'post',
+      url: `${window.ROOT_URL}/api/ready`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(() => {
+      dispatch({
+        type: SET_USER_READINESS,
+        payload: isReady
       });
     });
   };
