@@ -125,13 +125,15 @@ export function fetchGame() {
         }
       });
 
-      dispatch({
-        type: FETCH_TEAM,
-        payload: {
-          name: data.group.name,
-          members: data.group.users
-        }
-      });
+      if (data.group) {
+        dispatch({
+          type: FETCH_TEAM,
+          payload: {
+            name: data.group.name,
+            members: data.group.users
+          }
+        });
+      }
     });
   };
 }

@@ -53,14 +53,17 @@ class Station extends Component {
       <ul className="station-team-list">
         {_.map(this.props.teams, team => {
           return (
-            <div key={team._id}>
-              <li className="station-team">
-                <div className="station-team-name">{team.name}</div>
-              </li>
-              {_.includes(team.completedStations, station._id)
-                ? 'ok'
-                : renderButtons(team, station)}
-            </div>
+            <li key={team._id} className="station-team">
+              <div className="station-team-name">{team.name}</div>
+
+              {station && _.includes(team.completedStations, station._id) ? (
+                <div className="station-team-success">На 110%!</div>
+              ) : (
+                renderButtons(team, station)
+              )}
+
+              <hr />
+            </li>
           );
         })}
       </ul>
