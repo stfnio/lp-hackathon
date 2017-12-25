@@ -3,7 +3,6 @@ const router = express.Router();
 const RewardModel = require('../models/reward');
 
 router.get('/', (req, res) => {
-  req.io.sockets.emit('update', 'message'); 
   RewardModel.find()
     .then(rewards => {
       res.status(200).json(rewards);
