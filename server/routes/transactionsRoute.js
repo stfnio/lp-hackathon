@@ -8,6 +8,7 @@ router.post('/', (req, res) => {
   UserModel.findOne({ _id: req.body.user })
     .then(user => {
       const success = handleBalanceOperation(
+        req.io,
         user,
         req.body.operationType,
         req.body.amount
@@ -30,6 +31,7 @@ router.post('/fromValidator', (req, res) => {
   ])
     .then(([user, reward]) => {
       const success = handleBalanceOperation(
+        req.io,
         user,
         'Debit',
         reward.price,
@@ -46,7 +48,7 @@ router.post('/fromValidator', (req, res) => {
     });
 });
 
-function handleBalanceOperation(user, type, amount, reward) {
+function handleBalanceOperation(io, user, type, amount, reward) {
   switch (type) {
     case 'Accrual':
       const tr = new TransactionModel({
@@ -60,6 +62,10 @@ function handleBalanceOperation(user, type, amount, reward) {
       user.balance = user.balance + amount;
       user.save(err => {
         if (err) throw err;
+        io.sockets.emit('balanceUpdate', {
+          user: user._id,
+          balance: user.balance
+        });
       });
       return true;
     case 'Debit':
@@ -76,6 +82,10 @@ function handleBalanceOperation(user, type, amount, reward) {
         user.balance = user.balance - amount;
         user.save(err => {
           if (err) throw err;
+          io.sockets.emit('balanceUpdate', {
+            user: user._id,
+            balance: user.balance
+          });
         });
         return true;
       } else {

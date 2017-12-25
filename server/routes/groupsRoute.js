@@ -32,14 +32,15 @@ router.post('/stationCheckIn', (req, res) => {
   ])
     .then(([group, station]) => {
       group.users.forEach(u => {
+        const currentBalance = u.balance + req.body.rewardPoints;
         UserModel.update(
           { _id: u._id },
-          { balance: u.balance + req.body.rewardPoints },
+          { balance: currentBalance },
           err => {
             if (err) throw err;
           }
         );
-        // socket emit
+        req.io.sockets.emit('balanceUpdate', { user: u._id, balance: currentBalance}); 
       });
       group.completedStations.push(req.body.station);
       group.save(err => {

@@ -36,10 +36,12 @@ router.post('/', adminRequired, (req, res) => {
       } else {
         prepareGame();
         res.sendStatus(201);
+        socketEmit(req.io);
       }
     } else {
       prepareGame();
       res.sendStatus(201);
+      socketEmit(req.io);      
     }
   });
 });
@@ -111,6 +113,10 @@ function fetchGame() {
     .catch(err => {
       throw err;
     });
+}
+
+function socketEmit(io) {
+  req.io.sockets.emit('gameStarted', 'Started at: ' + new Date().now()); 
 }
 
 module.exports = router;
