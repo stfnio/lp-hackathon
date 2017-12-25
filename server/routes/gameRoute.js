@@ -58,7 +58,6 @@ function prepareGame() {
       if (++groupIndex === groups.length) groupIndex = 0;
       userIndex++;
     }
-    console.log(randomizedUsers);
     randomizedUsers.forEach(u => {
       UserModel.update({ _id: u._id }, { group: u.group._id }, err => {
         if (err) throw err;
@@ -66,12 +65,19 @@ function prepareGame() {
     });
 
     groups.forEach(g => {
-      GroupModel.update({ _id: g._id }, { users: g.users.map(u => u._id) }, err => {
-        if (err) throw err;
-      });
+      GroupModel.update(
+        { _id: g._id },
+        { users: g.users.map(u => u._id) },
+        err => {
+          if (err) throw err;
+        }
+      );
     });
-
-    const game = new GameModel({ isStarted: true, groups });
+    console.log(groups.map(g => String(g._id)));
+    const game = new GameModel({
+      isStarted: true,
+      groups: groups.map(g => String(g._id))
+    });
     game.save(err => {
       if (err) throw err;
     });
