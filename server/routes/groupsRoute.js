@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const adminRequired = require('../middleware/adminRequired');
 const GroupModel = require('../models/group');
 
 router.get('/', (req, res) => {
@@ -23,7 +24,20 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/stationCheckIn', (req, res) => {
+  const group = GroupModel.findOne({ _id: req.body.group })
+    .then(group => {
+      group.completedStations.push(req.body.station);
+      GroupModel.save(group, err => {
+        if (err) throw err;
+      });
+    })
+    .catch(err => {
+      throw err;
+    });
+});
+
+router.post('/', adminRequired, (req, res) => {
   const group = new GroupModel({
     name: req.body.name
   });

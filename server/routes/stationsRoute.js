@@ -12,6 +12,16 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.get('/', (req, res) => {
+  StationModel.find()
+    .then(stations => {
+      res.status(200).json(stations);
+    })
+    .catch(err => {
+      throw err;
+    });
+});
+
 router.post('/', (req, res) => {
   const station = new StationModel({
     name: req.body.name,
