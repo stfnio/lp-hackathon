@@ -11,7 +11,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import io from 'socket.io-client';
 
 import App from './containers/App';
-import Home from './containers/Home';
 import LogIn from './containers/LogIn';
 import Team from './containers/Team';
 import TeamsBalance from './containers/TeamsBalance';
@@ -19,14 +18,10 @@ import RewardList from './containers/RewardList';
 import RewardShow from './containers/RewardShow';
 import RewardQRCode from './containers/RewardQRCode';
 import PrivateRoute from './containers/PrivateRoute';
+import Home from './components/Home';
 
 import reducers from './reducers/index';
-import {
-  LOG_IN_USER,
-  SET_USER,
-  SET_ADMIN_PRIVILEGES,
-  SET_MANAGER_PRIVILEGES
-} from './actions/types';
+import { LOG_IN_USER } from './actions/types';
 import { fetchUser } from './actions/index';
 
 const store = createStore(

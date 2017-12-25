@@ -1,0 +1,11 @@
+.event-program {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 8px;
+}
+
+.event-program-subtitle {
+    font-size: 18px;
+}
