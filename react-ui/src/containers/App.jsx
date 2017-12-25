@@ -65,11 +65,11 @@ class App extends Component {
   };
 
   onClickQuit = () => {
+    this.props.setUserReadiness(false);
+
     this.props.logOutUser(() => {
       this.props.history.push('/login');
     });
-
-    this.props.setUserReadiness(false);
   };
 
   render() {
