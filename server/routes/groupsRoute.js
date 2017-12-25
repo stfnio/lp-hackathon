@@ -7,7 +7,6 @@ const UserModel = require('../models/user');
 
 router.get('/', (req, res) => {
   GroupModel.find()
-    .populate('completedStations')
     .then(groups => {
       res.status(200).json(groups);
     })
