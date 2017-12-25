@@ -5,7 +5,7 @@ import userReducer from './user-reducer';
 import gameReducer from './game-reducer';
 import teamReducer from './team-reducer';
 import teamsReducer from './teams-reducer';
-import stationReducer from './station-reducer';
+import stationsReducer from './stations-reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   game: gameReducer,
   team: teamReducer,
   teams: teamsReducer,
-  station: stationReducer
+  stations: stationsReducer
 });
 
 export default rootReducer;
