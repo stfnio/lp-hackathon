@@ -32,3 +32,8 @@
   border-radius: 3px;
   width: 100%;
 }
+
+.login-logo {
+  width: 100px;
+  margin-bottom: 20px;
+}

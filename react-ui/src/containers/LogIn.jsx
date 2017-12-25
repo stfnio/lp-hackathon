@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { logInUser } from '../actions/index';
 import GoogleLogin from 'react-google-login';
 import { withRouter } from 'react-router-dom';
+import logo from '../img/Logo.png';
 
 import GoogleIcon from '../components/GoogleIcon';
 
@@ -24,6 +25,7 @@ class LogIn extends Component {
     return (
       <div className="container">
         <div className="vertical-center">
+          <img className="login-logo" src={logo} />
           <h1 className="main-greeting">С новым годом!</h1>
           <div className="login-button-wrapper">
             <GoogleIcon
