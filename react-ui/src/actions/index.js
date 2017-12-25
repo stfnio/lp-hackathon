@@ -217,9 +217,9 @@ export function onTeamCompleteStation(teamId, stationId, rewardPoints) {
   };
 }
 
-export function updateUserBalance(user, balance) {
+export function updateUserBalance(userId, balance) {
   return (dispatch, getState) => {
-    if (getState().user._id === user._id) {
+    if (getState().user._id === userId) {
       return {
         type: UPDATE_USER_BALANCE,
         payload: balance
