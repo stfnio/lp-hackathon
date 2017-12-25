@@ -9,7 +9,9 @@ import {
   FETCH_GAME,
   FETCH_TEAM,
   SET_ADMIN_PRIVILEGES,
-  SET_MANAGER_PRIVILEGES
+  SET_MANAGER_PRIVILEGES,
+  FETCH_TEAMS,
+  FETCH_STATION
 } from './types';
 
 export function logInUser({ tokenId }, redirectToHomePage) {
@@ -148,6 +150,40 @@ export function setUserReadiness(isReady) {
       const useId = getState().user._id;
 
       dispatch(fetchUser(useId));
+    });
+  };
+}
+
+export function fetchTeams() {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${window.ROOT_URL}/api/teams`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(({ data }) => {
+      dispatch({
+        type: FETCH_TEAMS,
+        payload: data
+      });
+    });
+  };
+}
+
+export function fetchStation(stationId) {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${window.ROOT_URL}/api/stations/${stationId}`,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    }).then(({ data }) => {
+      dispatch({
+        type: FETCH_STATION,
+        payload: data
+      });
     });
   };
 }

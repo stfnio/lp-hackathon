@@ -25,7 +25,7 @@ class LogIn extends Component {
     return (
       <div className="container">
         <div className="vertical-center">
-          <img className="login-logo" src={logo} />
+          <img className="login-logo" src={logo} alt="logo" />
           <h1 className="main-greeting">С новым годом!</h1>
           <div className="login-button-wrapper">
             <GoogleIcon

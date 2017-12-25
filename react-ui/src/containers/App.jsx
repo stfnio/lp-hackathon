@@ -60,6 +60,10 @@ class App extends Component {
     this.props.history.push('/team');
   };
 
+  redirectToStation = () => {
+    this.props.history.push('/station');
+  };
+
   onClickQuit = () => {
     this.props.logOutUser(() => {
       this.props.history.push('/login');
@@ -69,13 +73,21 @@ class App extends Component {
   };
 
   render() {
+    const teamBalanceItem = (
+      <MenuItem
+        primaryText="Станция"
+        onClick={() => this.redirectToStation()}
+      />
+    );
+    const { auth, user, children } = this.props;
+
     return (
       <div className="App">
         <AppBar
           title="Loyalty game"
           iconElementRight={
             <div className="user-balance">
-              <ShowPoints points={this.props.user.balance} size={25} />
+              <ShowPoints points={user.balance} size={25} />
             </div>
           }
           onLeftIconButtonClick={this.toggleMenu}
@@ -89,8 +101,14 @@ class App extends Component {
           open={this.state.isMenuOpen}
           onRequestChange={isMenuOpen => this.setState({ isMenuOpen })}
         >
-          <UserInfo user={this.props.user} />
+          <UserInfo user={user} />
+
+          {(auth.isAdmin || auth.isManager) && <Divider />}
+
+          {auth.isManager && teamBalanceItem}
+
           <Divider />
+
           <MenuItem
             primaryText="Выйти"
             leftIcon={<Exit />}
@@ -98,7 +116,7 @@ class App extends Component {
           />
         </Drawer>
 
-        <div className="container">{this.props.children}</div>
+        <div className="container">{children}</div>
 
         <BottomNavigation
           style={{ position: 'fixed', bottom: 0 }}
@@ -120,9 +138,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ user }) {
+function mapStateToProps({ user, auth }) {
   return {
-    user
+    user,
+    auth
   };
 }
 

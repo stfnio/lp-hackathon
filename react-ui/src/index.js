@@ -13,7 +13,7 @@ import io from 'socket.io-client';
 import App from './containers/App';
 import LogIn from './containers/LogIn';
 import Team from './containers/Team';
-import TeamsBalance from './containers/TeamsBalance';
+import Station from './containers/Station';
 import RewardList from './containers/RewardList';
 import RewardShow from './containers/RewardShow';
 import RewardQRCode from './containers/RewardQRCode';
@@ -54,8 +54,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <PrivateRoute
-            path="/teams-balance"
-            component={TeamsBalance}
+            path="/station"
+            component={Station}
             roles={['admin', 'manager']}
           />
           <Route path="/login" component={LogIn} />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class TeamsBalance extends Component {
+class Station extends Component {
   componentDidMount() {
 
   }
@@ -18,4 +18,4 @@ function mapStateToProps({ user, team }) {
   };
 }
 
-export default connect(mapStateToProps)(TeamsBalance);
+export default connect(mapStateToProps)(Station);
