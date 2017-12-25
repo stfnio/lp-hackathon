@@ -12,6 +12,7 @@ const groupsRoute = require('./routes/groupsRoute');
 const usersRoute = require('./routes/usersRoute');
 const readyRoute = require('./routes/readyRoute');
 const gameRoute = require('./routes/gameRoute');
+const stationsRoute = require('./routes/stationsRoute');
 const authRequired = require('./middleware/authRequired');
 const adminRequired = require('./middleware/adminRequired');
 const managerRequired = require('./middleware/managerRequired');
@@ -44,6 +45,7 @@ app.use('/api/ready', readyRoute);
 app.use('/api/rewards', rewardsRoute);
 app.use('/api/game', gameRoute);
 app.use('/api/transactions', managerRequired, transactionsRoute);
+app.use('/api/stations', managerRequired, stationsRoute);
 app.use('/api/groups', adminRequired, groupsRoute);
 app.use('/api/users', usersRoute);
 

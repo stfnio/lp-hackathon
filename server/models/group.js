@@ -11,6 +11,12 @@ const GroupSchema = new Schema({
       type: Schema.ObjectId,
       ref: 'User'
     }
+  ],
+  completedStations: [
+    {
+      type: Schema.ObjectId,
+      ref: 'Station'
+    }
   ]
 })
 

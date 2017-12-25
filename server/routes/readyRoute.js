@@ -5,7 +5,7 @@ const router = express.Router();
 router.post('/', (req, res) => {
   UserModel.update(
     { _id: res.locals.user._id },
-    { isReady: !res.locals.user.isReady },
+    { isReady: req.body.isReady },
     err => {
       if (err) throw err;
     }

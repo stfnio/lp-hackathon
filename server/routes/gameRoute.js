@@ -50,7 +50,26 @@ function prepareGame() {
     UserModel.find({ role: 'User', isReady: true })
   ]).then(([groups, users]) => {
     const randomizedUsers = lodash.shuffle(users);
+    let groupIndex = 0;
+    let userIndex = 0;
+    while (userIndex < randomizedUsers.length) {
+      groups[groupIndex].users.push(randomizedUsers[userIndex]);
+      randomizedUsers[userIndex].group = groups[groupIndex];
+      if (++groupIndex === groups.length) groupIndex = 0;
+      userIndex++;
+    }
     console.log(randomizedUsers);
+    randomizedUsers.forEach(u => {
+      UserModel.update({ _id: u._id }, { group: u.group._id }, err => {
+        if (err) throw err;
+      });
+    });
+
+    groups.forEach(g => {
+      GroupModel.update({ _id: g._id }, { users: g.users.map(u => u._id) }, err => {
+        if (err) throw err;
+      });
+    });
 
     const game = new GameModel({ isStarted: true, groups });
     game.save(err => {
