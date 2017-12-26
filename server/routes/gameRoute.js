@@ -28,6 +28,24 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/users', (req, res) => {
+  Promise.all([
+    UserModel.count({ role: 'User' }),
+    UserModel.count({ role: 'User', isReady: false }),
+    UserModel.count({ role: 'User', isReady: true })
+  ]).then(([all, notReady, ready]) => {
+    res.status(200).json({ all, notReady, ready });
+  });
+});
+
+router.get('/stats', (req, res) => {
+  GroupModel.find()
+    .sort( {collectedPoints: 'desc'})
+    .then(groups => {
+      res.status(200).json(groups.map(g =>  ({ name: g.name, points: g.collectedPoints, completed: g.completedStations.length})))
+    });
+});
+
 router.post('/', adminRequired, (req, res) => {
   fetchGame().then(game => {
     if (game) {
@@ -41,7 +59,7 @@ router.post('/', adminRequired, (req, res) => {
     } else {
       prepareGame();
       res.sendStatus(201);
-      socketEmit(req.io);      
+      socketEmit(req.io);
     }
   });
 });
@@ -116,7 +134,7 @@ function fetchGame() {
 }
 
 function socketEmit(io) {
-  io.sockets.emit('gameStarted', 'Started at: ' + new Date()); 
+  io.sockets.emit('gameStarted', 'Started at: ' + new Date());
 }
 
 module.exports = router;
