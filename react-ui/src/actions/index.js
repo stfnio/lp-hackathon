@@ -153,9 +153,11 @@ export function setUserReadiness(isReady) {
         isReady
       }
     }).then(() => {
-      const useId = getState().user._id;
+      if (isReady) {
+        const useId = getState().user._id;
 
-      dispatch(fetchUser(useId));
+        dispatch(fetchUser(useId));
+      }
     });
   };
 }
