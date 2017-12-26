@@ -41,5 +41,6 @@
   padding: 12px;
   margin-bottom: 15px;
   margin-top: 10px;
-  border: 1px solid rgba(256, 256, 256, 0.26);
+  background-color: white;
+  border: 1px solid white;
 }
