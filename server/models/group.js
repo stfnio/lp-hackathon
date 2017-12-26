@@ -17,7 +17,10 @@ const GroupSchema = new Schema({
       type: Schema.ObjectId,
       ref: 'Station'
     }
-  ]
+  ],
+  collectedPoints: {
+    type: Number
+  }
 })
 
 module.exports = mongoose.model('Group', GroupSchema);

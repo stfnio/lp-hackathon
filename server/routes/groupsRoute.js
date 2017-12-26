@@ -43,6 +43,8 @@ router.post('/stationCheckIn', (req, res) => {
         req.io.sockets.emit('balanceUpdate', { user: u._id, balance: currentBalance}); 
       });
       group.completedStations.push(req.body.station);
+      const groupPoints = group.collectedPoints || 0;
+      group.collectedPoints = groupPoints + req.body.rewardPoints;
       group.save(err => {
         if (err) throw err;
       });
