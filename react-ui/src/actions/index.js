@@ -228,6 +228,8 @@ export function updateUserBalance(userId, balance) {
         type: UPDATE_USER_BALANCE,
         payload: balance
       });
+
+      window.alert(`У вас изменился баланс - ${balance} баллов!`);
     }
   };
 }
