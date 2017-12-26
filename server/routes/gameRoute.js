@@ -116,7 +116,7 @@ function fetchGame() {
 }
 
 function socketEmit(io) {
-  req.io.sockets.emit('gameStarted', 'Started at: ' + new Date().now()); 
+  io.sockets.emit('gameStarted', 'Started at: ' + new Date().now()); 
 }
 
 module.exports = router;
