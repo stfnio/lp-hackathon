@@ -7,7 +7,6 @@ npm-debug.log
 *.dev
 .DS_Store
 .vscode
-newrelic.js
 
 # Docker
 Dockerfile
