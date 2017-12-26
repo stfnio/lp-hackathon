@@ -196,7 +196,7 @@ export function fetchStations() {
   };
 }
 
-export function onTeamCompleteStation(teamId, stationId, rewardPoints) {
+export function teamCompleteStation(teamId, stationId, rewardPoints) {
   return dispatch => {
     axios({
       method: 'post',

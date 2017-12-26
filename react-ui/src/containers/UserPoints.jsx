@@ -9,6 +9,7 @@ class UserPoints extends Component {
 
     socket.on('balanceUpdate', ({ user, balance }) => {
       updateUserBalance(user, balance);
+      window.alert(`Вам начислили ${balance} баллов!`);
     });
   }
 

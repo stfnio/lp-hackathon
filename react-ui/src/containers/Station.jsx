@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   fetchStations,
   fetchTeams,
-  onTeamCompleteStation
+  teamCompleteStation
 } from '../actions/index';
 import _ from 'lodash';
 import '../styles/Station.css';
@@ -14,8 +14,16 @@ class Station extends Component {
     this.props.fetchTeams();
   }
 
-  onTeamPassStation = (teamId, stationId, rewardPoints) => {
-    this.props.onTeamCompleteStation(teamId, stationId, rewardPoints);
+  onTeamCompleteStation = (team, stationId, rewardPoints) => {
+    if (
+      window.confirm(
+        `Вы уверены, что хотите начислить ${
+          team.name
+        } - ${rewardPoints} баллов?`
+      )
+    ) {
+      this.props.teamCompleteStation(team._id, stationId, rewardPoints);
+    }
   };
 
   renderTeams(station) {
@@ -24,7 +32,7 @@ class Station extends Component {
         <div
           className="station-team-button red"
           onClick={() => {
-            this.onTeamPassStation(team._id, station._id, 50);
+            this.onTeamCompleteStation(team, station._id, 50);
           }}
         >
           50
@@ -32,7 +40,7 @@ class Station extends Component {
         <div
           className="station-team-button yellow"
           onClick={() => {
-            this.onTeamPassStation(team._id, station._id, 75);
+            this.onTeamCompleteStation(team, station._id, 75);
           }}
         >
           75
@@ -40,7 +48,7 @@ class Station extends Component {
         <div
           className="station-team-button green"
           onClick={() => {
-            this.onTeamPassStation(team._id, station._id, 100);
+            this.onTeamCompleteStation(team, station._id, 100);
           }}
         >
           100
@@ -93,5 +101,5 @@ function mapStateToProps({ stations, user, teams }) {
 export default connect(mapStateToProps, {
   fetchStations,
   fetchTeams,
-  onTeamCompleteStation
+  teamCompleteStation
 })(Station);
