@@ -11,6 +11,7 @@ class Team extends Component {
     fetchGame();
 
     socket.on('gameStarted', () => {
+      console.log('gameStarted received');
       fetchGame();
     });
   }

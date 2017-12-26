@@ -119,6 +119,7 @@ export function fetchGame() {
         Authorization: localStorage.getItem('token')
       }
     }).then(({ data }) => {
+      console.log('game data', data)
       if (data.game) {
         dispatch({
           type: FETCH_GAME,
